@@ -93,7 +93,7 @@
       </aside>
       <button id="sidebar-backdrop" class="sidebar-backdrop hidden" type="button" aria-label="关闭算法目录"></button>
 
-      <main class="content">
+      <main id="file-manager-view" class="content">
         <nav id="breadcrumbs" class="breadcrumbs" aria-label="当前位置"></nav>
 
         <section class="content-header">
@@ -162,13 +162,11 @@
           </footer>
         </section>
       </main>
-    </div>
     <main id="test-view" class="test-page hidden" hidden>
       <nav id="test-breadcrumbs" class="breadcrumbs" aria-label="算法测试当前位置"></nav>
       <section class="test-heading">
         <div><p class="eyebrow">ALGORITHM TEST</p><h2 id="test-title">算法测试</h2>
-          <p id="test-status" role="status">选择设备后开始测试</p>
-          <p id="test-profile" class="test-file-note"></p></div>
+          <p id="test-status" role="status">选择设备后开始测试</p></div>
         <div class="test-actions">
           <button id="test-clear" class="button secondary small" type="button">清空 output</button>
           <button id="test-gpu-button" class="button secondary small" type="button">选择 GPU · 全部</button>
@@ -196,6 +194,7 @@
       </div>
       <p class="test-page-note">关闭测试页或浏览器不会停止任务。可从右上角后台任务重新连接；同一算法只允许一个任务，不同算法最多同时运行 <span id="test-limit">6</span> 个。GPU 可共享，但不隔离显存配额。</p>
     </main>
+    </div>
   </div>
 
   <dialog id="test-gpu-dialog" class="modal test-options-modal">

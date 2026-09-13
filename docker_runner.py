@@ -280,7 +280,6 @@ class DockerRunner:
                     continue
                 if key not in params:
                     params[key] = value
-                    warnings.append(f"采用历史成功记录的 --{key}={value}")
                 elif str(params[key]) != str(value):
                     warnings.append(f"当前 --{key}={params[key]} 与历史记录 {value} 不同，采用当前文档/params.json")
             environment = history.get("environment", {})
@@ -293,9 +292,8 @@ class DockerRunner:
                     raise RunnerError(500, "历史环境配置不安全")
             if len(container_command) > 128 or any(not isinstance(v, str) or len(v) > 4096 or "\x00" in v for v in container_command):
                 raise RunnerError(500, "历史容器命令格式无效")
-            warnings.append("成功记录参考：" + history["record"])
             if environment or container_command:
-                warnings.append("采用历史实测的容器入口/环境参数（含小规模测试设置），不代表完整训练或验收；请在运行命令中核对。")
+                warnings.append("本次含自定义容器入口/环境参数（含小规模测试设置），不代表完整训练或验收；请在运行命令中核对。")
         allowed = {"gpus", "shm-size", "memory", "cpus", "pids-limit", "platform"}
         metadata = {"algorithm", "image_size", "patch_size", "merge_r", "timing_runs",
                     "timing_warmup", "attention_dim", "output_language"}
@@ -376,7 +374,10 @@ class DockerRunner:
     def create_args(self, plan, name):
         args = ["create", "--name", name, "--interactive", "--tty", "--init",
                 "--label", f"{LABEL}={self.scope}", "--network", "bridge",
-                "--security-opt", "no-new-privileges", "--cap-drop", "ALL"]
+                "--security-opt", "no-new-privileges"]
+        # Keep Docker's default capabilities, as in the verified docker run commands.
+        # Dropping ALL removes DAC_OVERRIDE: even container root then cannot write
+        # a host-user-owned 0775 output directory or overwrite its 0644 result files.
         if "--pids-limit" not in plan["options"]:
             args += ["--pids-limit", "512"]
         args += ["--mount", f"type=bind,src={plan['folder']}/input,dst=/app/data/input,readonly",

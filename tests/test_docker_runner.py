@@ -72,6 +72,9 @@ class RunnerTests(unittest.TestCase):
         self.assertIn("NVIDIA_VISIBLE_DEVICES=GPU-one", args)
         self.assertIn("readonly", " ".join(args))
         self.assertNotIn("--privileged", args)
+        self.assertNotIn("--cap-drop", args)
+        self.assertNotIn("--cap-add", args)
+        self.assertIn("no-new-privileges", args)
         self.assertNotIn("/var/run/docker.sock", " ".join(args))
         self.assertEqual(args[-1], "sha256:" + "a"*64)
         self.assertIn("16g", args)
@@ -140,6 +143,8 @@ class RunnerTests(unittest.TestCase):
         self.assertIn("EPOCHS=1", args)
         self.assertIn("device=GPU-one", args)
         self.assertNotIn("device=0", args)
+        self.assertNotIn("成功记录", "\n".join(plan["warnings"]))
+        self.assertNotIn("run.json", "\n".join(plan["warnings"]))
         self.runner.verified["algo-test"]["environment"] = {"NVIDIA_VISIBLE_DEVICES": "all"}
         with self.assertRaises(RunnerError): self.runner.plan("algo-test", "algo-test.tar", "1")
 

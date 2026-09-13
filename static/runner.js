@@ -80,12 +80,11 @@ const Runner = {
       this.filesSignature = null;
       this.active = true;
       state.currentPath = path;
-      show(document.querySelector(".workspace"), false);
+      show(byId("file-manager-view"), false);
       show(byId("test-view"), true);
+      renderAlgorithms();
+      closeSidebar();
       byId("test-title").textContent = path + " · 算法测试";
-      byId("test-profile").textContent = info.history
-        ? `已参考 ${info.history.started_at.slice(0, 10)} 成功记录${info.history.command.length || Object.keys(info.history.environment).length ? " · 含历史小规模测试参数，请核对运行命令" : ""}`
-        : "未收录历史成功记录 · 使用当前 params.json 与测试说明";
       byId("test-archive").replaceChildren(...info.archives.map(name => new Option(name, name)));
       byId("test-archive").value = info.archive;
       this.buttons();
@@ -106,7 +105,7 @@ const Runner = {
     const was = this.active;
     this.serial += 1; this.filesSerial += 1; this.active = false;
     show(byId("test-view"), false);
-    show(document.querySelector(".workspace"), true);
+    show(byId("file-manager-view"), true);
     return was;
   },
   breadcrumbs() {
@@ -305,16 +304,18 @@ const Runner = {
       byId("test-files-prev").disabled = this.page <= 1;
       byId("test-files-next").disabled = this.page * 100 >= result.total;
       for (const entry of result.entries) {
-        const button = document.createElement("button"); button.className = "test-file";
-        const icon = document.createElement("b"); icon.textContent = entry.kind === "directory" ? "▸" : "·";
-        const name = document.createElement("span"); name.textContent = entry.name;
+        const row = document.createElement("div"); row.className = "test-file";
+        const cell = document.createElement("div"); cell.className = "name-cell";
+        const name = document.createElement("button"); name.className = "entry-name";
+        name.type = "button"; name.textContent = entry.name; name.title = entry.name;
         const size = document.createElement("small"); size.textContent = entry.kind === "directory" ? "文件夹" : formatSize(entry.size);
-        button.append(icon, name, size);
-        button.onclick = () => {
+        cell.append(makeFileIcon(entry), name);
+        row.append(cell, size);
+        name.onclick = () => {
           if (entry.kind === "directory") {this.relative = joinPath(this.relative, entry.name); this.page = 1; this.files();}
           else openPreview({...entry, modified: new Date(entry.modified * 1000).toISOString()});
         };
-        target.append(button);
+        target.append(row);
       }
       if (!result.entries.length) target.textContent = "此目录没有运行文件";
     } catch (error) {

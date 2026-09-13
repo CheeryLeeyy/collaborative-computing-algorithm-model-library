@@ -94,6 +94,32 @@ def main():
             assert "全部算法" in page.locator("#test-breadcrumbs").inner_text()
             page.wait_for_function("() => document.querySelectorAll('.test-file').length === 5")
             assert "hidden.docx" not in page.locator("#test-files").inner_text()
+            assert page.locator("#sidebar").is_visible()
+            assert page.locator("#algorithm-list .active").inner_text() == "smoke-0"
+            assert page.locator("#test-profile").count() == 0
+            assert "成功记录" not in page.locator("#test-view").inner_text()
+            assert page.locator("#test-files .file-icon.folder").count() == 3
+            assert page.locator("#test-files .file-icon.archive").inner_text() == "TAR"
+            assert page.locator("#test-files .file-icon.code").inner_text() == "JSON"
+            style_script = "el => {const s = getComputedStyle(el); return [s.fontFamily, s.fontSize, s.color, s.fontWeight]}"
+            test_style = page.locator("#test-files .entry-name").first.evaluate(style_script)
+            page.locator("#test-files .entry-name").get_by_text("params.json", exact=True).click()
+            page.locator("#preview-dialog").wait_for(state="visible")
+            page.locator("#preview-dialog .modal-footer .modal-close").click()
+            page.locator("#test-files .entry-name").get_by_text("input", exact=True).click()
+            page.wait_for_function("() => document.querySelector('#test-file-path').textContent === '/input'")
+            page.locator("#test-up").click()
+            page.locator("#algorithm-list button[title='smoke-0']").click()
+            page.locator("#file-manager-view").wait_for(state="visible")
+            assert page.locator("#test-view").is_hidden()
+            assert page.locator("#directory-title").inner_text() == "smoke-0"
+            assert page.locator("#file-list .entry-name").first.evaluate(style_script) == test_style
+            open_test("smoke-0")
+            page.locator("#algorithm-list button[title='smoke-1']").click()
+            page.wait_for_function("() => document.querySelector('#directory-title').textContent === 'smoke-1'")
+            assert page.locator("#file-manager-view").is_visible()
+            passed("test page retains algorithm sidebar; same/other algorithm links open file manager; file icons/styles and previews match")
+            open_test("smoke-0")
             page.locator("#test-gpu-button").click()
             page.locator('input[name="test-gpu"][value="1"]').check()
             page.locator("#test-gpu-save").click()
@@ -172,6 +198,8 @@ def main():
             wait_for(lambda: job(real)["status"] not in ACTIVE, timeout=180, message="real algorithm")
             report["real_algorithm"] = job(real)
             report["real_algorithm_output"] = output(real)
+            assert "成功记录参考" not in report["real_algorithm_output"]
+            assert "run.json" not in report["real_algorithm_output"]
             report["result_files"] = [{"name": p.name, "size": p.stat().st_size} for p in (actual / "output").iterdir()]
             assert job(real)["status"] == "succeeded", (job(real), output(real))
             assert len(report["result_files"]) > 0
@@ -183,7 +211,16 @@ def main():
             page.wait_for_timeout(300)
             page.screenshot(path=str(artifact / "real-algorithm.png"), full_page=True)
             page.set_viewport_size({"width": 390, "height": 844})
+            page.wait_for_timeout(300)  # Allow the responsive sidebar transform to settle.
+            assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
             page.screenshot(path=str(artifact / "mobile.png"), full_page=True)
+            page.locator("#sidebar-toggle").click()
+            page.locator("#sidebar.open").wait_for(state="visible")
+            page.locator("#algorithm-list button[title='smoke-1']").click()
+            page.wait_for_function("() => document.querySelector('#directory-title').textContent === 'smoke-1'")
+            assert page.locator("#file-manager-view").is_visible()
+            assert page.locator("#sidebar.open").count() == 0
+            passed("mobile test page has no horizontal overflow and algorithm drawer navigates correctly")
             assert not report["page_errors"], report["page_errors"]
             passed("browser has no JavaScript errors")
             browser.close()
