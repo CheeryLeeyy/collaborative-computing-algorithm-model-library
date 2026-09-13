@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>算法文件管理</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <noscript><div class="noscript-warning">此页面需要启用 JavaScript 才能登录和管理文件。</div></noscript>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+
+  <main id="login-view" class="login-page">
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="eyebrow">LOCAL ALGORITHM LIBRARY</p>
+      <h1 id="login-title">算法文件管理</h1>
+      <p class="login-intro">登录后浏览、预览和管理服务器中的算法文件。</p>
+      <form id="login-form" novalidate>
+        <label class="field-label" for="username">用户名</label>
+        <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+        <label class="field-label" for="password">密码</label>
+        <div class="password-field">
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <button id="toggle-password" class="text-button" type="button" aria-label="显示密码">显示</button>
+        </div>
+        <p id="login-error" class="form-error" role="alert"></p>
+        <button id="login-button" class="button primary wide" type="submit">
+          <span class="button-label">登录</span>
+          <span class="button-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+      <p class="security-note"><span aria-hidden="true">◆</span> 仅限受信任的局域网环境访问</p>
+    </section>
+  </main>
+
+  <div id="app-view" class="app-shell hidden" hidden>
+    <header class="topbar">
+      <div class="topbar-brand">
+        <button id="sidebar-toggle" class="icon-button mobile-only" type="button" aria-label="打开算法目录">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+        <div class="mini-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <h1>算法文件管理</h1>
+          <p id="root-label">unzips</p>
+        </div>
+      </div>
+      <div class="topbar-status">
+        <div id="disk-status" class="disk-status" title="数据磁盘容量">
+          <span class="status-dot"></span>
+          <span id="disk-text">正在读取容量…</span>
+        </div>
+        <div class="user-menu">
+          <span id="user-avatar" class="user-avatar" aria-hidden="true">B</span>
+          <div class="user-copy">
+            <span id="current-user">bupt</span>
+            <small>已登录</small>
+          </div>
+          <button id="logout-button" class="button subtle small" type="button">退出</button>
+        </div>
+      </div>
+    </header>
+
+    <div id="storage-warning" class="storage-warning hidden" role="alert">
+      <strong>磁盘空间紧张</strong>
+      <span id="storage-warning-text"></span>
+    </div>
+
+    <div class="workspace">
+      <aside id="sidebar" class="sidebar" aria-label="算法目录">
+        <div class="sidebar-heading">
+          <div>
+            <span class="eyebrow">ALGORITHMS</span>
+            <h2>算法目录</h2>
+          </div>
+          <span id="algorithm-count" class="count-pill">—</span>
+        </div>
+        <label class="search-box compact" for="algorithm-search">
+          <span class="sr-only">筛选算法目录</span>
+          <span class="search-icon" aria-hidden="true"></span>
+          <input id="algorithm-search" type="search" placeholder="筛选算法…" autocomplete="off">
+        </label>
+        <nav id="algorithm-list" class="algorithm-list" aria-label="顶层算法目录"></nav>
+        <div id="algorithm-empty" class="sidebar-empty hidden">没有匹配的算法目录</div>
+      </aside>
+      <button id="sidebar-backdrop" class="sidebar-backdrop hidden" type="button" aria-label="关闭算法目录"></button>
+
+      <main class="content">
+        <nav id="breadcrumbs" class="breadcrumbs" aria-label="当前位置"></nav>
+
+        <section class="content-header">
+          <div class="title-block">
+            <p class="eyebrow">CURRENT DIRECTORY</p>
+            <h2 id="directory-title">全部算法</h2>
+            <p id="directory-summary">正在加载…</p>
+          </div>
+          <div class="toolbar">
+            <button id="refresh-button" class="button secondary" type="button">
+              <span class="refresh-icon" aria-hidden="true"></span>刷新
+            </button>
+            <button id="mkdir-button" class="button secondary" type="button">
+              <span aria-hidden="true">＋</span>新建文件夹
+            </button>
+            <button id="upload-button" class="button primary" type="button">
+              <span class="upload-icon" aria-hidden="true"></span>上传文件
+            </button>
+          </div>
+        </section>
+
+        <section class="browser-panel" aria-labelledby="directory-title">
+          <div class="browser-controls">
+            <div class="search-box">
+              <label class="sr-only" for="entry-search">搜索当前目录</label>
+              <span class="search-icon" aria-hidden="true"></span>
+              <input id="entry-search" type="search" placeholder="搜索当前目录" autocomplete="off">
+              <button id="clear-search" class="clear-search hidden" type="button" aria-label="清除搜索">×</button>
+            </div>
+            <div class="view-note"><span class="lazy-dot"></span>按当前层级加载</div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="file-table">
+              <caption class="sr-only">当前目录中的文件和文件夹</caption>
+              <thead>
+                <tr>
+                  <th scope="col">名称</th>
+                  <th scope="col">类型</th>
+                  <th scope="col">大小</th>
+                  <th scope="col">修改时间</th>
+                  <th scope="col"><span class="sr-only">操作</span></th>
+                </tr>
+              </thead>
+              <tbody id="file-list"></tbody>
+            </table>
+            <div id="loading-state" class="loading-state hidden">
+              <span class="large-spinner" aria-hidden="true"></span>
+              <p>正在加载…</p>
+            </div>
+            <div id="empty-state" class="empty-state hidden">
+              <div class="empty-illustration" aria-hidden="true"><span></span></div>
+              <h3 id="empty-title">此目录为空</h3>
+              <p id="empty-description">可上传文件或创建新文件夹。</p>
+            </div>
+          </div>
+
+          <footer id="pagination" class="pagination hidden">
+            <span id="pagination-summary"></span>
+            <div class="pagination-buttons">
+              <button id="previous-page" class="icon-button" type="button" aria-label="上一页">‹</button>
+              <span id="page-indicator">1 / 1</span>
+              <button id="next-page" class="icon-button" type="button" aria-label="下一页">›</button>
+            </div>
+          </footer>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="upload-dialog" class="modal upload-modal" aria-labelledby="upload-dialog-title" aria-describedby="upload-hint">
+    <div class="modal-header">
+      <div>
+        <p class="eyebrow">UPLOAD</p>
+        <h2 id="upload-dialog-title">上传文件</h2>
+        <p>目标：<span id="upload-target">根目录</span></p>
+      </div>
+      <button class="icon-button modal-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body">
+      <input id="file-input" class="sr-only" type="file" multiple>
+      <button id="drop-zone" class="drop-zone" type="button">
+        <span class="drop-icon" aria-hidden="true"></span>
+        <strong>拖放文件到这里</strong>
+        <span>或点击选择，可同时选择多个文件</span>
+      </button>
+      <div class="conflict-row">
+        <label for="conflict-mode">遇到同名文件</label>
+        <select id="conflict-mode">
+          <option value="rename" selected>自动重命名（推荐）</option>
+          <option value="error">跳过并报告</option>
+          <option value="overwrite">覆盖原文件</option>
+        </select>
+      </div>
+      <div id="upload-list" class="upload-list"></div>
+      <p id="upload-hint" class="upload-hint">大文件将直接写入数据盘；上传期间请保持页面开启。</p>
+    </div>
+    <div class="modal-footer">
+      <button class="button secondary modal-close" type="button">取消</button>
+      <button id="start-upload" class="button primary" type="button" disabled>开始上传</button>
+    </div>
+  </dialog>
+
+  <dialog id="preview-dialog" class="modal preview-modal" aria-labelledby="preview-title" aria-describedby="preview-meta">
+    <div class="modal-header">
+      <div class="preview-heading">
+        <span id="preview-icon" class="file-icon large" aria-hidden="true">TXT</span>
+        <div>
+          <p class="eyebrow">FILE PREVIEW</p>
+          <h2 id="preview-title">文件预览</h2>
+          <p id="preview-meta"></p>
+        </div>
+      </div>
+      <button class="icon-button modal-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <div id="preview-body" class="preview-body"></div>
+    <div class="modal-footer">
+      <button class="button secondary modal-close preview-close-button" type="button">关闭</button>
+      <a id="preview-download" class="button primary" href="#" download>下载文件</a>
+    </div>
+  </dialog>
+
+  <script src="/static/vendor/jszip-3.10.1/dist/jszip.min.js" defer></script>
+  <script src="/static/vendor/docx-preview-0.4.0/dist/docx-preview.min.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
