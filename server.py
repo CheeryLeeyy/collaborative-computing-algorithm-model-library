@@ -15,6 +15,7 @@ import mimetypes
 import os
 import re
 import secrets
+import signal
 import socket
 import stat
 import threading
@@ -27,6 +28,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any
+
+from docker_runner import DockerRunner, RunnerError
 
 
 APP_DIR = Path(__file__).resolve().parent
@@ -70,9 +73,9 @@ CONTROL_CHARS = re.compile(r"[\x00-\x1f\x7f]")
 RANGE_HEADER = re.compile(r"bytes=(\d*)-(\d*)$")
 
 
-class ApiError(Exception):
+class ApiError(RunnerError):
     def __init__(self, status: int, message: str, code: str = "request_error") -> None:
-        super().__init__(message)
+        super().__init__(status, message, code)
         self.status = status
         self.message = message
         self.code = code
@@ -326,6 +329,7 @@ class AppConfig:
     operation_log: Path
     max_concurrent_uploads: int
     request_timeout_seconds: int
+    max_concurrent_tests: int = 6
 
 
 class SessionStore:
@@ -420,7 +424,12 @@ class AlgorithmServer(http.server.ThreadingHTTPServer):
         self.login_limiter = LoginLimiter()
         self.upload_slots = threading.BoundedSemaphore(config.max_concurrent_uploads)
         self.operation_log_lock = threading.Lock()
+        self.runner = DockerRunner(config.data_root, config.max_concurrent_tests, self.log_operation)
         super().__init__(address, AlgorithmRequestHandler)
+
+    def server_close(self) -> None:
+        self.runner.close()
+        super().server_close()
 
     def log_operation(
         self,
@@ -507,7 +516,7 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
             if method == "POST":
                 self._validate_origin()
             self._dispatch(method)
-        except ApiError as exc:
+        except RunnerError as exc:
             if method == "POST":
                 # A rejected upload may still have an unread multi-GB body. Closing the
                 # connection prevents those bytes being parsed as the next HTTP request.
@@ -535,6 +544,11 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
         if method in {"GET", "HEAD"} and path in {
             "/static/app.css",
             "/static/app.js",
+            "/static/runner.js",
+            "/static/runner.css",
+            "/static/vendor/xterm/xterm.js",
+            "/static/vendor/xterm/xterm.css",
+            "/static/vendor/xterm/addon-fit.js",
             "/static/vendor/jszip-3.10.1/dist/jszip.min.js",
             "/static/vendor/docx-preview-0.4.0/dist/docx-preview.min.js",
         }:
@@ -552,6 +566,9 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
         if method == "GET" and path == "/api/system":
             self._api_system()
             return
+        if path.startswith("/api/tests/"):
+            self._api_tests(method, path.removeprefix("/api/tests/"), query)
+            return
         if method == "GET" and path == "/api/list":
             self._api_list(query)
             return
@@ -568,13 +585,24 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
             self._api_file(query, method == "HEAD")
             return
         if method == "POST" and path == "/api/upload":
-            self._api_upload(query)
+            self._require_session(csrf=True)
+            target = relative_text(clean_relative_path(self._query_value(query, "path")))
+            with self.server.runner.mutation(target):
+                self._api_upload(query)
             return
         if method == "POST" and path == "/api/mkdir":
-            self._api_mkdir()
+            self._require_session(csrf=True)
+            data = self._read_json()
+            target = relative_text(clean_relative_path(data.get("path") if isinstance(data.get("path"), str) else "") + (clean_name(data.get("name")),))
+            with self.server.runner.mutation(target):
+                self._api_mkdir(data)
             return
         if method == "POST" and path == "/api/delete":
-            self._api_delete()
+            self._require_session(csrf=True)
+            data = self._read_json()
+            target = relative_text(clean_relative_path(data.get("path") if isinstance(data.get("path"), str) else None, allow_root=False))
+            with self.server.runner.mutation(target):
+                self._api_delete(data)
             return
         if path.startswith("/api/"):
             raise ApiError(404, "接口不存在", "not_found")
@@ -628,6 +656,11 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
             "index.html",
             "app.css",
             "app.js",
+            "runner.js",
+            "runner.css",
+            "vendor/xterm/xterm.js",
+            "vendor/xterm/xterm.css",
+            "vendor/xterm/addon-fit.js",
             "vendor/jszip-3.10.1/dist/jszip.min.js",
             "vendor/docx-preview-0.4.0/dist/docx-preview.min.js",
         }:
@@ -1312,9 +1345,9 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
                 os.close(parent_fd)
             self.server.upload_slots.release()
 
-    def _api_mkdir(self) -> None:
+    def _api_mkdir(self, data: dict | None = None) -> None:
         _, session = self._require_session(csrf=True)
-        data = self._read_json()
+        data = self._read_json() if data is None else data
         parts = clean_relative_path(data.get("path") if isinstance(data.get("path"), str) else "")
         name = clean_name(data.get("name"))
         result_path = relative_text(parts + (name,))
@@ -1368,9 +1401,9 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
             os.close(child_fd)
         os.rmdir(name, dir_fd=parent_fd)
 
-    def _api_delete(self) -> None:
+    def _api_delete(self, data: dict | None = None) -> None:
         _, session = self._require_session(csrf=True)
-        data = self._read_json()
+        data = self._read_json() if data is None else data
         raw_path = data.get("path") if isinstance(data.get("path"), str) else None
         parts = clean_relative_path(raw_path, allow_root=False)
         path_text = relative_text(parts)
@@ -1427,6 +1460,56 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
             200,
             {"ok": True, "path": path_text, "kind": kind, "size": item_size},
         )
+
+    def _api_tests(self, method: str, action: str, query: dict) -> None:
+        _, session = self._require_session(csrf=method == "POST")
+        runner = self.server.runner
+        user = session["username"]
+        if method == "GET":
+            if action == "jobs":
+                result = runner.list(user)
+            elif action == "info":
+                result = runner.info(self._query_value(query, "path"))
+            elif action == "files":
+                try:
+                    page = int(self._query_value(query, "page", "1"))
+                except ValueError:
+                    raise ApiError(400, "分页参数无效")
+                result = runner.files(self._query_value(query, "path"), self._query_value(query, "relative"), page)
+            elif action == "output":
+                job = runner.get(self._query_value(query, "id"), user)
+                try:
+                    offset = max(0, int(self._query_value(query, "offset", "0")))
+                except ValueError:
+                    raise ApiError(400, "终端游标无效")
+                result = job.output(offset)
+            else:
+                raise ApiError(404, "接口不存在")
+        elif method == "POST":
+            data = self._read_json()
+            if action == "plan":
+                result = runner.preview(runner.plan(data.get("path"), data.get("archive"), data.get("gpu", "all")))
+            elif action == "start":
+                result = {"job": runner.start(data.get("path"), data.get("archive"), data.get("gpu", "all"), user, self.client_address[0])}
+            elif action == "clear-output":
+                result = runner.clear_output(data.get("path"), user, self.client_address[0], data.get("confirmed"))
+            elif action in {"stop", "input", "resize"}:
+                if not isinstance(data.get("id"), str):
+                    raise ApiError(400, "任务 ID 无效")
+                job = runner.get(data["id"], user)
+                if action == "stop":
+                    result = {"job": runner.stop(job)}
+                elif action == "input":
+                    runner.input(job, data.get("data"))
+                    result = {"ok": True}
+                else:
+                    runner.resize(job, data.get("rows"), data.get("cols"))
+                    result = {"ok": True}
+            else:
+                raise ApiError(404, "接口不存在")
+        else:
+            raise ApiError(405, "不支持该请求方法")
+        self._send_json(200, result)
 
     def log_request(self, code: int | str = "-", size: int | str = "-") -> None:
         try:
@@ -1524,6 +1607,7 @@ def build_config(data_root: Path | None = None, **overrides: Any) -> AppConfig:
             15,
             int(overrides.get("request_timeout_seconds") or os.environ.get("ALGO_REQUEST_TIMEOUT", "120")),
         ),
+        max_concurrent_tests=max(1, min(32, int(overrides.get("max_concurrent_tests") or os.environ.get("ALGO_MAX_TESTS", "6")))),
     )
 
 
@@ -1549,6 +1633,9 @@ def main() -> None:
     if config.operation_log == APP_DIR / "operations.log":
         migrate_legacy_operation_log(APP_DIR / "audit.log", config.operation_log)
     server = AlgorithmServer((args.host, args.port), config)
+    def stop_signal(_signum, _frame):
+        raise KeyboardInterrupt
+    signal.signal(signal.SIGTERM, stop_signal)
     address, port = server.server_address[:2]
     shown_host = discover_lan_ip() if address in {"0.0.0.0", "::"} else address
     print("算法文件管理服务已启动", flush=True)

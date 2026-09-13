@@ -109,6 +109,9 @@ class ServerIntegrationTest(unittest.TestCase):
             ("/", "text/html"),
             ("/static/app.css", "text/css"),
             ("/static/app.js", "application/javascript"),
+            ("/static/runner.js", "application/javascript"),
+            ("/static/runner.css", "text/css"),
+            ("/static/vendor/xterm/xterm.js", "application/javascript"),
             ("/static/vendor/jszip-3.10.1/dist/jszip.min.js", "application/javascript"),
             ("/static/vendor/docx-preview-0.4.0/dist/docx-preview.min.js", "application/javascript"),
         ]:
@@ -370,6 +373,37 @@ class ServerIntegrationTest(unittest.TestCase):
         self.assertIn("bytes=14", records[1]["detail"])
         self.assertIn("bytes=14", records[2]["detail"])
         self.assertIn("kind=directory", records[3]["detail"])
+
+
+    def test_runner_auth_csrf_and_schema(self):
+        for path in ("jobs", "info?path=algo2", "files?path=algo2", "output?id=unknown"):
+            self.assertEqual(self.request("GET", "/api/tests/" + path)[0], 401)
+        self.assertEqual(self.request("POST", "/api/tests/start", {})[0], 401)
+        self.login()
+        self.assertEqual(self.request("POST", "/api/tests/start", {})[0], 403)
+        self.assertEqual(self.request("POST", "/api/tests/start", {"path": []}, self.csrf_headers())[0], 400)
+        self.assertEqual(self.request("POST", "/api/tests/stop", {"id": []}, self.csrf_headers())[0], 400)
+        self.assertEqual(self.request("GET", "/api/tests/output?id=unknown")[0], 404)
+        self.assertEqual(self.request("GET", "/api/tests/info?path=algo2")[0], 404)
+        self.assertFalse(self.operation_log.exists())
+
+    def test_running_algorithm_write_endpoints_are_locked(self):
+        from docker_runner import Job
+        self.login()
+        job = Job({"path": "algo2", "archive": "algo2.tar", "gpu": "all"}, "bupt", "device-a")
+        job.status = "running"
+        self.server.runner.jobs[job.id] = job
+        try:
+            for endpoint, payload in (("delete", {"path": "algo2/hello.txt"}), ("mkdir", {"path": "algo2", "name": "new"})):
+                status, result, _ = self.request("POST", "/api/" + endpoint, payload, self.csrf_headers())
+                self.assertEqual(status, 409)
+                self.assertEqual(result["code"], "algorithm_busy")
+            self.assertEqual(self.request("POST", "/api/upload?path=algo2&filename=extra.txt", b"data", self.csrf_headers())[0], 409)
+            self.assertEqual(self.request("GET", "/api/list?path=algo2")[0], 200)
+            self.assertEqual(self.request("GET", "/api/preview?path=algo2/hello.txt")[0], 200)
+            self.assertEqual((self.root / "algo2/hello.txt").read_text(), "hello 世界")
+        finally:
+            job.status = "stopped"
 
 
 class UnitTest(unittest.TestCase):

@@ -183,6 +183,7 @@ function toast(message, type = "success", title = "") {
 
 
 function switchToLogin(message = "") {
+  Runner.reset();
   if (state.previewAbortController) state.previewAbortController.abort();
   state.previewAbortController = null;
   state.authenticated = false;
@@ -229,6 +230,8 @@ async function loadWorkspace() {
   dom.entrySearch.value = "";
   show(dom.clearSearch, false);
   await Promise.allSettled([loadSystem(), loadAlgorithms()]);
+  Runner.pollJobs();
+  if (Runner.route()) return;
   await loadDirectory();
 }
 
@@ -387,7 +390,8 @@ function updateHash(path, replace = false) {
 
 
 function navigateTo(path, options = {}) {
-  if (path === state.currentPath && !options.force) return;
+  const wasTesting = Runner.leave();
+  if (path === state.currentPath && !options.force && !wasTesting) return;
   state.currentPath = path;
   state.page = 1;
   state.search = "";
@@ -1506,8 +1510,9 @@ function bindEvents() {
 
   window.addEventListener("hashchange", () => {
     if (!state.authenticated) return;
+    if (Runner.route()) return;
     const path = pathFromHash();
-    if (path !== state.currentPath) navigateTo(path, { fromHistory: true });
+    if (path !== state.currentPath || Runner.active) navigateTo(path, { fromHistory: true });
   });
 }
 
@@ -1536,5 +1541,6 @@ function cacheDom() {
 document.addEventListener("DOMContentLoaded", () => {
   cacheDom();
   bindEvents();
+  Runner.init();
   bootstrap();
 });

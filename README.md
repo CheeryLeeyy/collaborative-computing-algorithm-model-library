@@ -21,6 +21,9 @@
 - 容量通过解析后的真实目录文件描述符计算；当前 `/home/ly/jisuanjishu_docker` 虽是软链接，页面显示和校验的是其实际存储盘 `/mnt/disk2`，不是 `/home` 根分区。
 - 默认只删除文件、链接和空文件夹，避免误删整个非空算法目录。
 - Session、CSRF、登录限速、操作日志、路径穿越和符号链接防护均在服务端执行。
+- Docker 算法测试页：实时交互终端、GPU 可见设备选择、后台任务重连、停止、确认清空 output。
+- 后端默认最多同时运行 6 个不同算法；同一算法目录原子互斥，运行期间禁止网页修改该算法的文件。
+- 对照当前测试说明 DOCX、params.json 和已核对的历史成功配置生成命令，详情见 [Docker 测试说明](DOCKER_TESTING.md)。
 
 ## 启动
 
@@ -114,6 +117,7 @@ tail -f /home/ly/jisuanjishu_docker/kt_1/algorithm_file_manager/operations.log
 | `ALGO_MAX_UPLOAD` | `40GiB` | 单文件上传上限，支持 `MiB/GiB/TiB` |
 | `ALGO_MIN_FREE` | `2GiB` | 上传完成后必须保留的磁盘空间 |
 | `ALGO_MAX_UPLOADS` | `2` | 同时处理的上传数 |
+| `ALGO_MAX_TESTS` | `6` | Docker 算法测试最大并行数，1–32；同一算法最多 1 个 |
 | `ALGO_PREVIEW_SIZE` | `1MiB` | 文本预览最多读取的字节数 |
 | `ALGO_DOCX_PREVIEW_SIZE` | `10MiB` | DOCX 在线预览的压缩文件上限 |
 | `ALGO_DOCX_UNPACKED_SIZE` | `40MiB` | DOCX 在线预览的解压后体积上限 |
@@ -135,7 +139,9 @@ ALGO_MAX_UPLOAD=10GiB ALGO_HOST=10.112.76.79 ./start.sh
 - `0.0.0.0` 会监听所有 IPv4 网卡，不等同于“只允许局域网”。请勿在路由器上做公网端口映射；有多块网卡时优先通过 `ALGO_HOST` 绑定内网 IP。
 - 普通 HTTP 在局域网中不是加密连接。只应在可信内网/VPN 使用；敏感环境请通过 Caddy/Nginx 配置 HTTPS，并设置 `ALGO_COOKIE_SECURE=1`。
 - 当前数据目录权限较宽（现场为 `0777`）。若机器有其他不可信用户，建议使用专用用户/组并将目录权限收紧为 `0770` 或 `0750`。
-- 页面不执行、导入或解压上传的算法包；只有用户主动预览 DOCX 时，才会在受限浏览器区域解析该文档。
+- 只有登录用户点击“开始”才会加载并运行选定的 Docker 镜像包；普通浏览或预览不会启动算法。不要上传、运行来源不可信的镜像。
+- Docker 测试要求服务用户能访问 Docker daemon；这个权限非常高，本网页仅适合可信账号和可信内网。终端只连当前容器的 stdin，不提供宿主机 Shell。
+- 默认仅挂载 input（只读）和 output（可写），使用 Docker bridge 网络；禁止自定义宿主路径、Docker socket、特权容器、host 网络和 GPU 可见性覆盖。
 - 删除是永久操作，没有网页回收站。非空目录的递归删除默认关闭。
 - 页面按真实挂载盘容量判断警告。上传大文件前请再次确认 `/mnt/disk2` 的实时磁盘余量。
 
@@ -146,3 +152,5 @@ ALGO_MAX_UPLOAD=10GiB ALGO_HOST=10.112.76.79 ./start.sh
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+真实 Docker 与浏览器端到端测试为显式选择执行，见 `DOCKER_TESTING.md`，不会被上述单元测试自动启动。

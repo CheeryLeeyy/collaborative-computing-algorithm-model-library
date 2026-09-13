@@ -1,0 +1,1782 @@
+{
+  "schema": 1,
+  "audited_on": "2026-09-14",
+  "records_scanned": 189,
+  "note": "Historical success is not a guarantee for modified archives or inputs. GPU and mount paths are always supplied by the current website job.",
+  "algorithms": {
+    "algo1-4-j-1": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-1/default/run.json",
+      "started_at": "2026-09-10T08:36:55.849583+00:00",
+      "case": "default",
+      "image": "algo1-4-j-1:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-2": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-2/default/run.json",
+      "started_at": "2026-09-10T08:36:55.849865+00:00",
+      "case": "default",
+      "image": "algo1-4-j-2:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-3": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-3/default/run.json",
+      "started_at": "2026-09-10T08:36:57.183546+00:00",
+      "case": "default",
+      "image": "algo1-4-j-3:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-4": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-4/default/run.json",
+      "started_at": "2026-09-10T08:36:57.290583+00:00",
+      "case": "default",
+      "image": "algo1-4-j-4:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-5": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-5/default/run.json",
+      "started_at": "2026-09-10T08:36:57.771603+00:00",
+      "case": "default",
+      "image": "algo1-4-j-5:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-6": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-6/default/run.json",
+      "started_at": "2026-09-10T08:36:57.964906+00:00",
+      "case": "default",
+      "image": "algo1-4-j-6:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-7": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-7/default/run.json",
+      "started_at": "2026-09-10T08:36:58.360745+00:00",
+      "case": "default",
+      "image": "algo1-4-j-7:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-8": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-8/default/run.json",
+      "started_at": "2026-09-10T08:36:58.555845+00:00",
+      "case": "default",
+      "image": "algo1-4-j-8:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-9": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-9/default/run.json",
+      "started_at": "2026-09-10T08:36:58.945508+00:00",
+      "case": "default",
+      "image": "algo1-4-j-9:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-10": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-10/default/run.json",
+      "started_at": "2026-09-10T08:36:59.198290+00:00",
+      "case": "default",
+      "image": "algo1-4-j-10:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-11": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-11/fixed-params/run.json",
+      "started_at": "2026-09-10T08:42:53.842837+00:00",
+      "case": "fixed-params",
+      "image": "algo1-4-j-11:v1",
+      "options": {
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 32,
+      "unsupported": []
+    },
+    "algo1-4-j-12": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-12/current-params/run.json",
+      "started_at": "2026-09-10T08:42:20.429935+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-12:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 32,
+      "unsupported": []
+    },
+    "algo1-4-j-13": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-13/fixed-params/run.json",
+      "started_at": "2026-09-10T08:41:24.276554+00:00",
+      "case": "fixed-params",
+      "image": "algo1-4-j-13:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 32,
+      "unsupported": []
+    },
+    "algo1-4-j-14": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-14/default/run.json",
+      "started_at": "2026-09-10T08:39:11.423392+00:00",
+      "case": "default",
+      "image": "algo1-4-j-14:v1",
+      "options": {
+        "gpus": "device=0"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 17,
+      "unsupported": []
+    },
+    "algo1-4-j-15": {
+      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-15/default/run.json",
+      "started_at": "2026-09-10T08:40:26.446081+00:00",
+      "case": "default",
+      "image": "algo1-4-j-15:v1",
+      "options": {
+        "gpus": "device=0"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 17,
+      "unsupported": []
+    },
+    "algo1-4-j-16": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-16/default/run.json",
+      "started_at": "2026-08-12T12:49:24.281452+00:00",
+      "case": "default",
+      "image": "algo1-4-j-16:v1",
+      "options": {
+        "gpus": "device=0"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 17,
+      "unsupported": []
+    },
+    "algo1-4-j-17": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-17/default/run.json",
+      "started_at": "2026-08-12T12:49:24.278046+00:00",
+      "case": "default",
+      "image": "algo1-4-j-17:v1",
+      "options": {
+        "gpus": "device=1"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-18": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-18/default/run.json",
+      "started_at": "2026-08-12T12:51:15.766443+00:00",
+      "case": "default",
+      "image": "algo1-4-j-18:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-19": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-19/default/run.json",
+      "started_at": "2026-08-12T12:51:30.879314+00:00",
+      "case": "default",
+      "image": "algo1-4-j-19:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 5,
+      "unsupported": []
+    },
+    "algo1-4-j-20": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-20/default/run.json",
+      "started_at": "2026-08-12T12:56:00.162733+00:00",
+      "case": "default",
+      "image": "algo1-4-j-20:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-21": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-21/default/run.json",
+      "started_at": "2026-08-12T13:01:09.672083+00:00",
+      "case": "default",
+      "image": "algo1-4-j-21:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 13,
+      "unsupported": []
+    },
+    "algo1-4-j-22": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-22/default/run.json",
+      "started_at": "2026-08-12T13:01:28.046005+00:00",
+      "case": "default",
+      "image": "algo1-4-j-22:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-23": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-23/default/run.json",
+      "started_at": "2026-08-12T13:04:34.994998+00:00",
+      "case": "default",
+      "image": "algo1-4-j-23:v1",
+      "options": {
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 4,
+      "unsupported": []
+    },
+    "algo1-4-j-24": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-24/current-params/run.json",
+      "started_at": "2026-09-10T08:42:35.793905+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-24:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 5,
+      "unsupported": []
+    },
+    "algo1-4-j-25": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-25/default/run.json",
+      "started_at": "2026-08-12T13:39:59.126098+00:00",
+      "case": "default",
+      "image": "algo1-4-j-25:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-26": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-26/default/run.json",
+      "started_at": "2026-08-12T13:39:11.949535+00:00",
+      "case": "default",
+      "image": "algo1-4-j-26:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-27": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-27/default/run.json",
+      "started_at": "2026-08-12T13:39:12.172186+00:00",
+      "case": "default",
+      "image": "algo1-4-j-27:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-28": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-28/default/run.json",
+      "started_at": "2026-08-12T13:54:32.303217+00:00",
+      "case": "default",
+      "image": "algo1-4-j-28:v1",
+      "options": {
+        "gpus": "device=1"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 8,
+      "unsupported": []
+    },
+    "algo1-4-j-29": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-29/default/run.json",
+      "started_at": "2026-08-12T13:54:34.622328+00:00",
+      "case": "default",
+      "image": "algo1-4-j-29:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-30": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-30/default/run.json",
+      "started_at": "2026-08-12T13:56:43.257342+00:00",
+      "case": "default",
+      "image": "algo1-4-j-30:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-31": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-31/current-params/run.json",
+      "started_at": "2026-09-10T08:43:53.419585+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-31:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-32": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-32/current-params/run.json",
+      "started_at": "2026-09-10T08:46:07.720499+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-32:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-33": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-33/default/run.json",
+      "started_at": "2026-08-12T14:14:39.011296+00:00",
+      "case": "default",
+      "image": "algo1-4-j-33:v1",
+      "options": {
+        "gpus": "device=1"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 8,
+      "unsupported": []
+    },
+    "algo1-4-j-34": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-34/current-params/run.json",
+      "started_at": "2026-09-10T08:48:12.223662+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-34:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-35": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-35/current-params/run.json",
+      "started_at": "2026-09-10T08:50:08.359013+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-35:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-36": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-36/default/run.json",
+      "started_at": "2026-08-12T13:24:36.157627+00:00",
+      "case": "default",
+      "image": "algo1-4-j-36:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-37": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-37/default/run.json",
+      "started_at": "2026-08-12T13:24:36.164595+00:00",
+      "case": "default",
+      "image": "algo1-4-j-37:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-38": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-38/default/run.json",
+      "started_at": "2026-08-12T13:29:45.487775+00:00",
+      "case": "default",
+      "image": "algo1-4-j-38:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 130,
+      "unsupported": []
+    },
+    "algo1-4-j-39": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-39/default/run.json",
+      "started_at": "2026-08-12T13:30:08.758940+00:00",
+      "case": "default",
+      "image": "algo1-4-j-39:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-40": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-40/current-params/run.json",
+      "started_at": "2026-09-10T08:51:35.408285+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-40:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 14,
+      "unsupported": []
+    },
+    "algo1-4-j-41": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-41/current-params/run.json",
+      "started_at": "2026-09-10T08:54:11.483878+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-41:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 48,
+      "unsupported": []
+    },
+    "algo1-4-j-42": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-42/current-params/run.json",
+      "started_at": "2026-09-10T09:02:52.003806+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-42:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 63,
+      "unsupported": []
+    },
+    "algo1-4-j-43": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-43/default/run.json",
+      "started_at": "2026-08-12T15:05:38.281923+00:00",
+      "case": "default",
+      "image": "algo1-4-j-43:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-44": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-44/default/run.json",
+      "started_at": "2026-08-12T15:05:38.366390+00:00",
+      "case": "default",
+      "image": "algo1-4-j-44:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-45": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-45/default/run.json",
+      "started_at": "2026-08-12T13:09:34.569449+00:00",
+      "case": "default",
+      "image": "algo1-4-j-45:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 16,
+      "unsupported": []
+    },
+    "algo1-4-j-46": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-46/default/run.json",
+      "started_at": "2026-08-12T13:09:34.580849+00:00",
+      "case": "default",
+      "image": "algo1-4-j-46:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 16,
+      "unsupported": []
+    },
+    "algo1-4-j-47": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-47/default/run.json",
+      "started_at": "2026-08-12T13:11:30.543453+00:00",
+      "case": "default",
+      "image": "algo1-4-j-47:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 16,
+      "unsupported": []
+    },
+    "algo1-4-j-48": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-48/default/run.json",
+      "started_at": "2026-08-12T13:11:30.702061+00:00",
+      "case": "default",
+      "image": "algo1-4-j-48:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 16,
+      "unsupported": []
+    },
+    "algo1-4-j-49": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-49/current-params/run.json",
+      "started_at": "2026-09-10T09:03:17.229102+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-49:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 16,
+      "unsupported": []
+    },
+    "algo1-4-j-50": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-50/default/run.json",
+      "started_at": "2026-08-12T15:12:04.304595+00:00",
+      "case": "default",
+      "image": "algo1-4-j-50:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 16,
+      "unsupported": []
+    },
+    "algo1-4-j-51": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-51/default/run.json",
+      "started_at": "2026-08-12T15:16:12.458191+00:00",
+      "case": "default",
+      "image": "algo1-4-j-51:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-52": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-52/default/run.json",
+      "started_at": "2026-08-12T15:16:47.891908+00:00",
+      "case": "default",
+      "image": "algo1-4-j-52:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-53": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-53/default/run.json",
+      "started_at": "2026-08-12T15:20:33.012212+00:00",
+      "case": "default",
+      "image": "algo1-4-j-53:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-54": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-54/default/run.json",
+      "started_at": "2026-08-12T15:22:30.314105+00:00",
+      "case": "default",
+      "image": "algo1-4-j-54:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-55": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-55/default/run.json",
+      "started_at": "2026-08-12T15:26:48.114733+00:00",
+      "case": "default",
+      "image": "algo1-4-j-55:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-56": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-56/current-params/run.json",
+      "started_at": "2026-09-10T09:03:35.174848+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-56:v1",
+      "options": {
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-57": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-57/default/run.json",
+      "started_at": "2026-08-12T15:36:02.919187+00:00",
+      "case": "default",
+      "image": "algo1-4-j-57:v1",
+      "options": {
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-58": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-58/default/run.json",
+      "started_at": "2026-08-12T15:38:44.310185+00:00",
+      "case": "default",
+      "image": "algo1-4-j-58:v1",
+      "options": {
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-59": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-59/default/run.json",
+      "started_at": "2026-08-12T15:42:19.462448+00:00",
+      "case": "default",
+      "image": "algo1-4-j-59:v1",
+      "options": {
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 9,
+      "unsupported": []
+    },
+    "algo1-4-j-60": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-60/default/run.json",
+      "started_at": "2026-08-12T15:45:44.699294+00:00",
+      "case": "default",
+      "image": "algo1-4-j-60:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 4,
+      "unsupported": []
+    },
+    "algo1-4-j-61": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-61/default/run.json",
+      "started_at": "2026-08-12T15:49:54.019042+00:00",
+      "case": "default",
+      "image": "algo1-4-j-61:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 7,
+      "unsupported": []
+    },
+    "algo1-4-j-62": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-62/default/run.json",
+      "started_at": "2026-08-12T13:11:59.571426+00:00",
+      "case": "default",
+      "image": "algo1-4-j-62:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-63": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-63/default/run.json",
+      "started_at": "2026-08-12T15:52:18.040560+00:00",
+      "case": "default",
+      "image": "algo1-4-j-63:v1",
+      "options": {
+        "gpus": "device=1"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 6,
+      "unsupported": []
+    },
+    "algo1-4-j-64": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-64/default/run.json",
+      "started_at": "2026-08-12T15:55:50.979393+00:00",
+      "case": "default",
+      "image": "algo1-4-j-64:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 14,
+      "unsupported": []
+    },
+    "algo1-4-j-65": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-65/default/run.json",
+      "started_at": "2026-08-12T16:04:10.805764+00:00",
+      "case": "default",
+      "image": "algo1-4-j-65:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 7,
+      "unsupported": []
+    },
+    "algo1-4-j-66": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-66/default/run.json",
+      "started_at": "2026-08-12T16:05:13.990359+00:00",
+      "case": "default",
+      "image": "algo1-4-j-66:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-67": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-67/default/run.json",
+      "started_at": "2026-08-12T16:05:12.348990+00:00",
+      "case": "default",
+      "image": "algo1-4-j-67:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 301,
+      "unsupported": []
+    },
+    "algo1-4-j-68": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-68/default/run.json",
+      "started_at": "2026-08-12T16:17:34.876189+00:00",
+      "case": "default",
+      "image": "algo1-4-j-68:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-69": {
+      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-69/default/run.json",
+      "started_at": "2026-08-12T13:12:07.373403+00:00",
+      "case": "default",
+      "image": "algo1-4-j-69:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-70": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-70/current-params/run.json",
+      "started_at": "2026-09-10T09:03:48.109145+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-70:v1",
+      "options": {
+        "gpus": "all"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 8,
+      "unsupported": []
+    },
+    "algo1-4-j-71": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-71/default/run.json",
+      "started_at": "2026-08-12T16:34:17.499586+00:00",
+      "case": "default",
+      "image": "algo1-4-j-71:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 165,
+      "unsupported": []
+    },
+    "algo1-4-j-72": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-72/current-params/run.json",
+      "started_at": "2026-09-10T09:04:02.759653+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-72:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-73": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-73/current-params/run.json",
+      "started_at": "2026-09-10T09:04:07.555171+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-73:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 4,
+      "unsupported": []
+    },
+    "algo1-4-j-74": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-74/default/run.json",
+      "started_at": "2026-08-12T17:49:13.112257+00:00",
+      "case": "default",
+      "image": "algo1-4-j-74:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-75": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-75/current-params/run.json",
+      "started_at": "2026-09-10T09:06:24.243050+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-75:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-76": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-76/current-params/run.json",
+      "started_at": "2026-09-10T09:07:08.436830+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-76:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-77": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-77/default/run.json",
+      "started_at": "2026-08-12T16:48:57.788728+00:00",
+      "case": "default",
+      "image": "algo1-4-j-77:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "4g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 6,
+      "unsupported": []
+    },
+    "algo1-4-j-78": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-78/current-params/run.json",
+      "started_at": "2026-09-10T09:07:09.269416+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-78:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-79": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-79/default/run.json",
+      "started_at": "2026-08-12T17:07:02.487454+00:00",
+      "case": "default",
+      "image": "algo1-4-j-79:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-80": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-80/default/run.json",
+      "started_at": "2026-08-12T17:02:23.639330+00:00",
+      "case": "default",
+      "image": "algo1-4-j-80:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 10,
+      "unsupported": []
+    },
+    "algo1-4-j-81": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-81/default/run.json",
+      "started_at": "2026-08-12T17:24:36.897283+00:00",
+      "case": "default",
+      "image": "algo1-4-j-81:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [
+        "python",
+        "baselines/FedAvg/fedavg_main.py",
+        "--config",
+        "configs/baselines/fedavg_main.json",
+        "--set",
+        "dataset=cifar100",
+        "--set",
+        "alpha=0.1",
+        "--set",
+        "seed=42",
+        "--set",
+        "epochs=1",
+        "--set",
+        "local_epochs=1",
+        "--set",
+        "num_users=2",
+        "--set",
+        "frac=1.0"
+      ],
+      "exit_code": 0,
+      "output_files": 6,
+      "unsupported": []
+    },
+    "algo1-4-j-82": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-82/default/run.json",
+      "started_at": "2026-08-12T17:24:36.897321+00:00",
+      "case": "default",
+      "image": "algo1-4-j-82:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [
+        "python",
+        "baselines/FedProx/fedprox_main.py",
+        "--config",
+        "configs/baselines/fedprox_main.json",
+        "--set",
+        "dataset=cifar100",
+        "--set",
+        "alpha=0.1",
+        "--set",
+        "seed=42",
+        "--set",
+        "mu=0.01",
+        "--set",
+        "epochs=1",
+        "--set",
+        "local_epochs=1",
+        "--set",
+        "num_users=2",
+        "--set",
+        "frac=1.0"
+      ],
+      "exit_code": 0,
+      "output_files": 6,
+      "unsupported": []
+    },
+    "algo1-4-j-83": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-83/default/run.json",
+      "started_at": "2026-08-12T17:31:40.575895+00:00",
+      "case": "default",
+      "image": "algo1-4-j-83:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [
+        "python",
+        "-m",
+        "torch.distributed.run",
+        "--standalone",
+        "--nproc_per_node=1",
+        "-m",
+        "feddrmoe.train",
+        "--config",
+        "configs/feddrmoe/base_main.json",
+        "--set",
+        "dataset=cifar100",
+        "--set",
+        "alpha=0.1",
+        "--set",
+        "seed=42",
+        "--set",
+        "world_size=1",
+        "--set",
+        "allow_download=false",
+        "--set",
+        "epochs=1",
+        "--set",
+        "local_epochs=1",
+        "--set",
+        "num_users=2",
+        "--set",
+        "frac=1.0"
+      ],
+      "exit_code": 0,
+      "output_files": 6,
+      "unsupported": []
+    },
+    "algo1-4-j-84": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-84/default/run.json",
+      "started_at": "2026-08-12T17:33:03.736737+00:00",
+      "case": "default",
+      "image": "algo1-4-j-84:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-85": {
+      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-85/default/run.json",
+      "started_at": "2026-08-05T03:08:11.739198+00:00",
+      "case": "default",
+      "image": "algo1-4-j-85:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-86": {
+      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-86/default/run.json",
+      "started_at": "2026-08-05T03:10:55.282900+00:00",
+      "case": "default",
+      "image": "algo1-4-j-86:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-87": {
+      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-87/default/run.json",
+      "started_at": "2026-08-05T03:11:56.548865+00:00",
+      "case": "default",
+      "image": "algo1-4-j-87:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-88": {
+      "record": "docker_retest_history_20260910/runs/algo1-4-j-88/current-params/run.json",
+      "started_at": "2026-09-10T09:07:51.827217+00:00",
+      "case": "current-params",
+      "image": "algo1-4-j-88:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 15,
+      "unsupported": []
+    },
+    "algo1-4-j-89": {
+      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-89/default/run.json",
+      "started_at": "2026-08-05T04:28:07.211751+00:00",
+      "case": "default",
+      "image": "algo1-4-j-89:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {
+        "EPOCHS": "1",
+        "NUM_USERS": "4",
+        "NUM_EDGES": "2",
+        "CLIENTS_PER_EDGE": "2",
+        "CLIENT_UPLOAD_INTERVAL": "1",
+        "EDGE_UPLOAD_INTERVAL": "1"
+      },
+      "command": [],
+      "exit_code": 0,
+      "output_files": 33,
+      "unsupported": []
+    },
+    "algo1-4-j-90": {
+      "record": "docker_90_defaults_88_accuracy_20260910/runs/algo1-4-j-90/tar-roundtrip-no-env/run.json",
+      "started_at": "2026-09-10T09:30:04.949302+00:00",
+      "case": "tar-roundtrip-no-env",
+      "image": "algo1-4-j-90:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 4,
+      "unsupported": []
+    },
+    "algo1-4-j-93": {
+      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-93/default/run.json",
+      "started_at": "2026-08-05T04:54:13.914465+00:00",
+      "case": "default",
+      "image": "algo1-4-j-93:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-94": {
+      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-94/after-load/run.json",
+      "started_at": "2026-08-05T05:03:24.837836+00:00",
+      "case": "after-load",
+      "image": "algo1-4-j-94:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-95": {
+      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-95/run_summary_compact.json",
+      "started_at": "2026-08-04T16:56:05.511876+00:00",
+      "case": "default",
+      "image": "algo1-4-j-95:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-96": {
+      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-96/run_summary_compact.json",
+      "started_at": "2026-08-04T16:59:47.538966+00:00",
+      "case": "default",
+      "image": "algo1-4-j-96:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-97": {
+      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-97/run_summary_compact.json",
+      "started_at": "2026-08-04T17:04:12.509329+00:00",
+      "case": "default",
+      "image": "algo1-4-j-97:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 390,
+      "unsupported": []
+    },
+    "algo1-4-j-98": {
+      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-98/run_summary_compact.json",
+      "started_at": "2026-08-04T17:08:28.025930+00:00",
+      "case": "default",
+      "image": "algo1-4-j-98:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 391,
+      "unsupported": []
+    },
+    "algo1-4-j-99": {
+      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-99/run_summary_compact.json",
+      "started_at": "2026-08-04T17:11:51.498694+00:00",
+      "case": "default",
+      "image": "algo1-4-j-99:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 390,
+      "unsupported": []
+    },
+    "algo1-4-j-100": {
+      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-100/run_summary_compact.json",
+      "started_at": "2026-08-04T17:16:30.559411+00:00",
+      "case": "default",
+      "image": "algo1-4-j-100:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 390,
+      "unsupported": []
+    },
+    "algo1-4-j-105": {
+      "record": "docs_formula_punctuation_new_algorithms_1_131/evidence/algo1-4-j-105/run_summary.json",
+      "started_at": "2026-08-18T07:35:52.717590+00:00",
+      "case": "default",
+      "image": "algo1-4-j-105:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    },
+    "algo1-4-j-106": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-106/default/run.json",
+      "started_at": "2026-08-21T04:53:19.606982+00:00",
+      "case": "default",
+      "image": "algo1-4-j-106:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-107": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-107/default/run.json",
+      "started_at": "2026-08-21T04:53:22.355007+00:00",
+      "case": "default",
+      "image": "algo1-4-j-107:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-108": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-108/default/run.json",
+      "started_at": "2026-08-21T04:53:24.338061+00:00",
+      "case": "default",
+      "image": "algo1-4-j-108:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-109": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-109/default/run.json",
+      "started_at": "2026-08-21T04:52:49.144265+00:00",
+      "case": "default",
+      "image": "algo1-4-j-109:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 5,
+      "unsupported": []
+    },
+    "algo1-4-j-110": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-110/default/run.json",
+      "started_at": "2026-08-21T04:53:26.369462+00:00",
+      "case": "default",
+      "image": "algo1-4-j-110:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-111": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-111/default/run.json",
+      "started_at": "2026-08-21T04:53:28.258901+00:00",
+      "case": "default",
+      "image": "algo1-4-j-111:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-112": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-112/default/run.json",
+      "started_at": "2026-08-21T04:53:30.285440+00:00",
+      "case": "default",
+      "image": "algo1-4-j-112:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-113": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-113/default/run.json",
+      "started_at": "2026-08-21T04:53:32.113018+00:00",
+      "case": "default",
+      "image": "algo1-4-j-113:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-114": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-114/default/run.json",
+      "started_at": "2026-08-21T04:53:57.904455+00:00",
+      "case": "default",
+      "image": "algo1-4-j-114:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-115": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-115/default/run.json",
+      "started_at": "2026-08-21T04:54:01.862031+00:00",
+      "case": "default",
+      "image": "algo1-4-j-115:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-116": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-116/default/run.json",
+      "started_at": "2026-08-21T04:54:04.864549+00:00",
+      "case": "default",
+      "image": "algo1-4-j-116:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-117": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-117/default/run.json",
+      "started_at": "2026-08-21T04:54:08.329404+00:00",
+      "case": "default",
+      "image": "algo1-4-j-117:v1",
+      "options": {
+        "gpus": "all",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-118": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-118/default/run.json",
+      "started_at": "2026-08-21T04:54:10.827763+00:00",
+      "case": "default",
+      "image": "algo1-4-j-118:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-119": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-119/default/run.json",
+      "started_at": "2026-08-21T04:54:14.540876+00:00",
+      "case": "default",
+      "image": "algo1-4-j-119:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 6,
+      "unsupported": []
+    },
+    "algo1-4-j-120": {
+      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-120/default/run.json",
+      "started_at": "2026-08-21T04:54:16.837550+00:00",
+      "case": "default",
+      "image": "algo1-4-j-120:v1",
+      "options": {},
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 5,
+      "unsupported": []
+    },
+    "algo1-4-j-121": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-121/default/run.json",
+      "started_at": "2026-08-12T17:35:15.981388+00:00",
+      "case": "default",
+      "image": "algo1-4-j-121:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 5,
+      "unsupported": []
+    },
+    "algo1-4-j-122": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-122/default/run.json",
+      "started_at": "2026-08-12T17:37:04.228437+00:00",
+      "case": "default",
+      "image": "algo1-4-j-122:v1",
+      "options": {
+        "gpus": "device=0",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 390,
+      "unsupported": []
+    },
+    "algo1-4-j-123": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-123/default/run.json",
+      "started_at": "2026-08-12T17:35:15.986114+00:00",
+      "case": "default",
+      "image": "algo1-4-j-123:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
+    "algo1-4-j-124": {
+      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-124/default/run.json",
+      "started_at": "2026-08-12T17:07:07.932021+00:00",
+      "case": "default",
+      "image": "algo1-4-j-124:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "8g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 3,
+      "unsupported": []
+    },
+    "algo1-4-j-128": {
+      "record": "docs_formula_punctuation_new_algorithms_1_131/evidence/algo1-4-j-128/run_summary.json",
+      "started_at": "2026-08-18T07:39:29.880710+00:00",
+      "case": "default",
+      "image": "algo1-4-j-128:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 1,
+      "unsupported": []
+    }
+  }
+}

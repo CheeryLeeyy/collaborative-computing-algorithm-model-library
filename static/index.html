@@ -6,6 +6,8 @@
   <meta name="color-scheme" content="light">
   <title>算法文件管理</title>
   <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/vendor/xterm/xterm.css">
+  <link rel="stylesheet" href="/static/runner.css">
 </head>
 <body>
   <noscript><div class="noscript-warning">此页面需要启用 JavaScript 才能登录和管理文件。</div></noscript>
@@ -48,6 +50,10 @@
         </div>
       </div>
       <div class="topbar-status">
+        <details id="running-widget" class="running-widget">
+          <summary id="running-summary">后台任务 · 0 / 6</summary>
+          <div id="running-jobs" class="running-jobs"></div>
+        </details>
         <div id="disk-status" class="disk-status" title="数据磁盘容量">
           <span class="status-dot"></span>
           <span id="disk-text">正在读取容量…</span>
@@ -97,6 +103,7 @@
             <p id="directory-summary">正在加载…</p>
           </div>
           <div class="toolbar">
+            <button id="algorithm-test-button" class="button secondary" type="button">▷ 算法测试</button>
             <button id="refresh-button" class="button secondary" type="button">
               <span class="refresh-icon" aria-hidden="true"></span>刷新
             </button>
@@ -156,7 +163,51 @@
         </section>
       </main>
     </div>
+    <main id="test-view" class="test-page hidden" hidden>
+      <nav id="test-breadcrumbs" class="breadcrumbs" aria-label="算法测试当前位置"></nav>
+      <section class="test-heading">
+        <div><p class="eyebrow">ALGORITHM TEST</p><h2 id="test-title">算法测试</h2>
+          <p id="test-status" role="status">选择设备后开始测试</p>
+          <p id="test-profile" class="test-file-note"></p></div>
+        <div class="test-actions">
+          <button id="test-clear" class="button secondary small" type="button">清空 output</button>
+          <button id="test-gpu-button" class="button secondary small" type="button">选择 GPU · 全部</button>
+          <button id="test-command" class="button secondary small" type="button">查看运行命令</button>
+          <button id="test-start" class="button primary small" type="button">▷ 开始</button>
+          <button id="test-stop" class="button secondary small" type="button" disabled>■ 停止</button>
+        </div>
+      </section>
+      <div class="test-layout">
+        <aside class="test-files-panel">
+          <div class="test-panel-heading"><strong>运行文件</strong><button id="test-files-refresh" class="button subtle small" type="button">刷新</button></div>
+          <label class="test-archive-label" for="test-archive">Docker 镜像包</label>
+          <select id="test-archive" aria-label="Docker 镜像包"></select>
+          <div class="test-file-location"><button id="test-up" class="icon-button" type="button" aria-label="上一级">↑</button><span id="test-file-path">/</span></div>
+          <div id="test-files" class="test-files" aria-live="polite"></div>
+          <div class="test-file-pagination"><button id="test-files-prev" class="button subtle small" type="button">上一页</button><span id="test-files-count"></span><button id="test-files-next" class="button subtle small" type="button">下一页</button></div>
+          <button id="test-file-manager" class="button secondary small" type="button">在文件管理中打开</button>
+          <p class="test-file-note">说明文档已隐藏。运行期间每 3 秒刷新当前目录；点击文件可预览。</p>
+        </aside>
+        <section class="test-terminal-panel" aria-label="Docker 交互式终端">
+          <div class="test-terminal-heading"><span><i class="terminal-light"></i> Docker Terminal</span><span id="test-connection">实时终端</span></div>
+          <div id="test-terminal"></div>
+          <div class="test-terminal-footer"><span>点击终端输入 · Enter 发送 · 支持 Ctrl+C</span><button id="test-interrupt" type="button">发送 Ctrl+C</button></div>
+        </section>
+      </div>
+      <p class="test-page-note">关闭测试页或浏览器不会停止任务。可从右上角后台任务重新连接；同一算法只允许一个任务，不同算法最多同时运行 <span id="test-limit">6</span> 个。GPU 可共享，但不隔离显存配额。</p>
+    </main>
   </div>
+
+  <dialog id="test-gpu-dialog" class="modal test-options-modal">
+    <div class="modal-header"><h2>选择可见 GPU</h2><button class="icon-button modal-close" type="button" aria-label="关闭">×</button></div>
+    <div class="modal-body"><p>仅所选 GPU 对容器可见；容器内部的编号可能重新从 0 开始。</p><div id="test-gpu-options"></div><p id="test-gpu-warning"></p></div>
+    <div class="modal-footer"><button id="test-gpu-save" class="button primary" type="button">确认选择</button></div>
+  </dialog>
+  <dialog id="test-command-dialog" class="modal test-command-modal">
+    <div class="modal-header"><h2>Docker 运行命令</h2><button class="icon-button modal-close" type="button" aria-label="关闭">×</button></div>
+    <div class="modal-body"><pre id="test-command-text"></pre></div>
+    <div class="modal-footer"><button class="button secondary modal-close" type="button">关闭</button></div>
+  </dialog>
 
   <dialog id="upload-dialog" class="modal upload-modal" aria-labelledby="upload-dialog-title" aria-describedby="upload-hint">
     <div class="modal-header">
@@ -212,6 +263,9 @@
 
   <script src="/static/vendor/jszip-3.10.1/dist/jszip.min.js" defer></script>
   <script src="/static/vendor/docx-preview-0.4.0/dist/docx-preview.min.js" defer></script>
+  <script src="/static/vendor/xterm/xterm.js" defer></script>
+  <script src="/static/vendor/xterm/addon-fit.js" defer></script>
+  <script src="/static/runner.js" defer></script>
   <script src="/static/app.js" defer></script>
 </body>
 </html>
