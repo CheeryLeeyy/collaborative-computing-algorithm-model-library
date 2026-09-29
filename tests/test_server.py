@@ -8,6 +8,7 @@ import unittest
 import urllib.parse
 import zipfile
 from pathlib import Path
+from unittest.mock import patch
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
@@ -24,6 +25,16 @@ from server import (  # noqa: E402
 
 
 class ServerIntegrationTest(unittest.TestCase):
+    def test_runtime_thread_configuration(self):
+        self.assertEqual(self.server.runner.cpu_threads, 2)
+        for value in (0, 1, 2, 256):
+            self.assertEqual(build_config(self.root, test_cpu_threads=value).test_cpu_threads, value)
+        with patch.dict(os.environ, {"ALGO_CPU_THREADS": "0"}):
+            self.assertEqual(build_config(self.root).test_cpu_threads, 0)
+        for value in (-1, 257, "invalid"):
+            with self.assertRaises(SystemExit):
+                build_config(self.root, test_cpu_threads=value)
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "data"
@@ -380,6 +391,7 @@ class ServerIntegrationTest(unittest.TestCase):
             self.assertEqual(self.request("GET", "/api/tests/" + path)[0], 401)
         self.assertEqual(self.request("POST", "/api/tests/start", {})[0], 401)
         self.login()
+        self.assertEqual(self.request("GET", "/api/tests/jobs")[1]["max_jobs"], 8)
         self.assertEqual(self.request("POST", "/api/tests/start", {})[0], 403)
         self.assertEqual(self.request("POST", "/api/tests/start", {"path": []}, self.csrf_headers())[0], 400)
         self.assertEqual(self.request("POST", "/api/tests/stop", {"id": []}, self.csrf_headers())[0], 400)

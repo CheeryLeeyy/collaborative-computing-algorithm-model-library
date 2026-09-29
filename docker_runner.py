@@ -119,8 +119,11 @@ class Job:
 
 
 class DockerRunner:
-    def __init__(self, root, max_jobs=6, operation=None, docker="docker"):
+    def __init__(self, root, max_jobs=8, operation=None, docker="docker", cpu_threads=2):
+        if type(cpu_threads) is not int or not 0 <= cpu_threads <= 256:
+            raise ValueError("cpu_threads 必须为 0 至 256 的整数")
         self.root, self.max_jobs = Path(root), max_jobs
+        self.cpu_threads = cpu_threads
         self.operation, self.docker = operation, docker
         self.lock = threading.RLock()
         self.jobs, self.mutations = {}, set()
@@ -294,6 +297,15 @@ class DockerRunner:
                 raise RunnerError(500, "历史容器命令格式无效")
             if environment or container_command:
                 warnings.append("本次含自定义容器入口/环境参数（含小规模测试设置），不代表完整训练或验收；请在运行命令中核对。")
+        # Small CPU models can become orders of magnitude slower when every
+        # concurrent container starts a host-sized OpenMP/BLAS/OpenCV pool.
+        # Runtime-only defaults: never change inputs, training rounds, GPU
+        # selection or the image entrypoint; preserve explicit audited settings.
+        environment = dict(environment)
+        if self.cpu_threads:
+            for key in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
+                        "OPENCV_FOR_THREADS_NUM"):
+                environment.setdefault(key, str(self.cpu_threads))
         allowed = {"gpus", "shm-size", "memory", "cpus", "pids-limit", "platform"}
         metadata = {"algorithm", "image_size", "patch_size", "merge_r", "timing_runs",
                     "timing_warmup", "attention_dim", "output_language"}
@@ -389,12 +401,112 @@ class DockerRunner:
         args += ["--env", "NVIDIA_VISIBLE_DEVICES=" + plan["device"], *plan["options"], plan["image"], *plan["container_command"]]
         return args
 
+    @staticmethod
+    def image_missing(result):
+        return "no such image" in result.stderr.lower() or "no such object" in result.stderr.lower()
+
+    def inspect_cached(self, refs):
+        result = self.command(["image", "inspect", *refs])
+        if result.returncode and not self.image_missing(result):
+            raise RunnerError(503, "无法检查本地 Docker 镜像缓存，请检查 Docker 服务与访问权限")
+        try:
+            images = json.loads(result.stdout or "[]")
+            if not isinstance(images, list) or any(not isinstance(i, dict) for i in images):
+                raise ValueError()
+            return images
+        except ValueError as exc:
+            raise RunnerError(503, "Docker 镜像缓存返回的数据无效") from exc
+
+    def archive_config(self, plan):
+        # Read only small metadata; never extract the archive or hash all layer tarballs.
+        # Config includes content hashes (diff_ids) for every uncompressed layer.
+        if "_archive_config" in plan:
+            return plan["_archive_config"]
+        try:
+            with directory(self.root, [plan["path"]]) as fd:
+                handle = os.open(plan["archive"], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+                with os.fdopen(handle, "rb") as stream:
+                    meta = os.fstat(stream.fileno())
+                    if not stat.S_ISREG(meta.st_mode):
+                        raise RunnerError(400, "镜像必须是普通文件")
+                    if [meta.st_dev, meta.st_ino, meta.st_size, meta.st_mtime_ns] != plan["fingerprint"]:
+                        raise RunnerError(409, "镜像文件已变化，请重新开始")
+                    with tarfile.open(fileobj=stream, mode="r:*") as tar:
+                        def read_member(names, limit):
+                            for name in names:
+                                try:
+                                    member = tar.getmember(name)
+                                except KeyError:
+                                    continue
+                                if not member.isfile() or member.size > limit:
+                                    raise ValueError("invalid metadata")
+                                return tar.extractfile(member).read(limit + 1)
+                            raise ValueError("missing metadata")
+                        manifest = json.loads(read_member(["manifest.json", "./manifest.json"], 1024 * 1024))
+                        name = manifest[0]["Config"]
+                        match = re.fullmatch(r"(?:blobs/sha256/)?([0-9a-f]{64})(?:\.json)?", name)
+                        if not match:
+                            raise ValueError("invalid config digest")
+                        raw = read_member([name, "./" + name], 4 * 1024 * 1024)
+                        if hashlib.sha256(raw).hexdigest() != match[1]:
+                            raise ValueError("config digest mismatch")
+                        config = json.loads(raw)
+                        layers = config["rootfs"]["diff_ids"]
+                        if (config["rootfs"].get("type") != "layers" or not isinstance(layers, list)
+                                or any(not isinstance(v, str) or not re.fullmatch(r"sha256:[0-9a-f]{64}", v) for v in layers)
+                                or not isinstance(config.get("config"), dict)):
+                            raise ValueError("invalid image configuration")
+                        plan["_archive_config"] = ("sha256:" + match[1], config)
+                        return plan["_archive_config"]
+        except (OSError, tarfile.TarError, ValueError, KeyError, TypeError, IndexError, AttributeError) as exc:
+            raise RunnerError(400, "无法校验镜像配置，请确认 Docker 镜像包完整且未被修改") from exc
+
+    @staticmethod
+    def same_runtime_image(config, image):
+        # Docker inspect omits empty fields such as OnBuild:null. Retain all
+        # nonempty configuration, including entrypoint, env, user and labels.
+        def normalize(value):
+            if isinstance(value, dict):
+                return {k: v for k, v in value.items() if v not in (None, "", [], {}, False, 0)}
+            return value
+        return (bool(config.get("architecture")) and bool(config.get("os"))
+                and all(config.get(a, "") == image.get(b, "") for a, b in (
+                    ("architecture", "Architecture"), ("os", "Os"), ("variant", "Variant"),
+                    ("os.version", "OsVersion"), ("created", "Created"), ("author", "Author")))
+                and config["rootfs"]["diff_ids"] == image.get("RootFS", {}).get("Layers", [])
+                and normalize(config["config"]) == normalize(image.get("Config")))
+
+    def image_cached(self, plan):
+        # Query immutable content digests, never trust a mutable tag. Every
+        # preview/start rechecks Docker; we do not persist cache-presence flags.
+        if self.inspect_cached([plan["image"]]):
+            return True
+        config_id, config = self.archive_config(plan)
+        if config_id != plan["image"] and self.inspect_cached([config_id]):
+            plan["image"] = config_id
+            return True
+        # Classic archives use config IDs; Docker's containerd store uses
+        # manifest IDs. Find equivalent layers + execution config even when
+        # the original tag was renamed, removed or now points to another image.
+        listing = self.command(["image", "ls", "--all", "--quiet", "--no-trunc"])
+        if listing.returncode:
+            raise RunnerError(503, "无法读取本地 Docker 镜像列表")
+        ids = list(dict.fromkeys(v for v in listing.stdout.splitlines() if re.fullmatch(r"sha256:[0-9a-f]{64}", v)))
+        for start in range(0, len(ids), 64):
+            for image in self.inspect_cached(ids[start:start + 64]):
+                if self.same_runtime_image(config, image) and re.fullmatch(r"sha256:[0-9a-f]{64}", image.get("Id", "")):
+                    plan["image"] = image["Id"]  # Pin the verified content, not its name.
+                    return True
+        return False
+
     def preview(self, plan, name="kt1-test-<任务ID>"):
-        commands = [[self.docker, "load", "--input", str(Path(plan["folder"]) / plan["archive"])],
-                    [self.docker, *self.create_args(plan, name)],
+        cached = self.image_cached(plan)
+        commands = [] if cached else [[self.docker, "load", "--input", str(Path(plan["folder"]) / plan["archive"])]]
+        commands += [[self.docker, *self.create_args(plan, name)],
                     [self.docker, "start", "--attach", "--interactive", name],
                     [self.docker, "rm", name]]
         return {"commands": [shlex.join(args) for args in commands], "warnings": plan["warnings"],
+                "image_cached": cached,
                 "document": plan["document"],
                 "history": plan["history"],
                 "note": "镜像摘要已存在时跳过 load；create + start 等价于交互式 docker run。仅挂载 input（只读）和 output，使用 Docker 默认 bridge 网络。"}
@@ -521,7 +633,7 @@ class DockerRunner:
                 if job.cancel.is_set():
                     return
                 # Serialize loads: archives can share tags, but jobs always run immutable image IDs.
-                if self.command(["image", "inspect", plan["image"]]).returncode:
+                if not self.image_cached(plan):
                     self._phase(job, "loading")
                     previous = {}
                     for tag in plan["tags"]:
@@ -533,14 +645,8 @@ class DockerRunner:
                             raise RunnerError(400, "Docker 镜像加载失败，请查看终端输出")
                         if job.cancel.is_set():
                             return
-                        if self.command(["image", "inspect", plan["image"]]).returncode:
-                            # Resolve legacy archives imported into Docker 29's containerd
-                            # store AFTER load, then pin the immutable ID, never a tag.
-                            for tag in plan["tags"]:
-                                loaded = self.command(["image", "inspect", "--format", "{{.Id}}", tag])
-                                if loaded.returncode == 0 and re.fullmatch(r"sha256:[0-9a-f]{64}", loaded.stdout.strip()):
-                                    plan["image"] = loaded.stdout.strip()
-                                    break
+                        if not self.image_cached(plan):
+                            raise RunnerError(400, "加载后的镜像内容与归档不一致")
                     finally:
                         # Loading an uploaded archive must not replace another service's
                         # existing tags. Our container runs the newly loaded immutable ID.
@@ -548,7 +654,7 @@ class DockerRunner:
                             restored = self.command(["tag", old_id, tag])
                             if restored.returncode:
                                 job.append("\r\n警告：原镜像标签恢复失败 " + tag + "\r\n")
-                if self.command(["image", "inspect", plan["image"]]).returncode:
+                if not self.image_cached(plan):
                     raise RunnerError(400, "加载后的镜像摘要与归档不一致")
             finally:
                 self.load_lock.release()

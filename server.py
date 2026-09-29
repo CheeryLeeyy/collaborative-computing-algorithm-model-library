@@ -34,9 +34,10 @@ from docker_runner import DockerRunner, RunnerError
 
 APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
-DEFAULT_DATA_ROOT = Path("/home/ly/jisuanjishu_docker/kt_1/unzips")
+DEFAULT_DATA_ROOT = APP_DIR.parent / "unzips"
 DEFAULT_USERNAME = "bupt"
-# PBKDF2-SHA256 hash of the documented initial password. No plaintext is stored here.
+# Legacy fixture credential, retained for isolated tests only. CLI deployment
+# refuses this fallback; production credentials must be configured locally.
 DEFAULT_PASSWORD_HASH = (
     "pbkdf2_sha256$310000$algo-manager-default-v1$"
     "a8c60868a7790ab839fa4657d77f4d5806541b4957e84d1934926de07a909477"
@@ -329,7 +330,8 @@ class AppConfig:
     operation_log: Path
     max_concurrent_uploads: int
     request_timeout_seconds: int
-    max_concurrent_tests: int = 6
+    max_concurrent_tests: int = 8
+    test_cpu_threads: int = 2
 
 
 class SessionStore:
@@ -424,7 +426,8 @@ class AlgorithmServer(http.server.ThreadingHTTPServer):
         self.login_limiter = LoginLimiter()
         self.upload_slots = threading.BoundedSemaphore(config.max_concurrent_uploads)
         self.operation_log_lock = threading.Lock()
-        self.runner = DockerRunner(config.data_root, config.max_concurrent_tests, self.log_operation)
+        self.runner = DockerRunner(config.data_root, config.max_concurrent_tests, self.log_operation,
+                                   cpu_threads=config.test_cpu_threads)
         super().__init__(address, AlgorithmRequestHandler)
 
     def server_close(self) -> None:
@@ -1527,6 +1530,12 @@ class AlgorithmRequestHandler(http.server.BaseHTTPRequestHandler):
 
 
 def build_config(data_root: Path | None = None, **overrides: Any) -> AppConfig:
+    try:
+        test_cpu_threads = int(overrides.get("test_cpu_threads", os.environ.get("ALGO_CPU_THREADS", "2")))
+        if not 0 <= test_cpu_threads <= 256:
+            raise ValueError()
+    except (TypeError, ValueError) as exc:
+        raise SystemExit("ALGO_CPU_THREADS 必须为 0 至 256 的整数（0 表示不覆盖镜像线程设置）") from exc
     root = (data_root or Path(os.environ.get("ALGO_ROOT", DEFAULT_DATA_ROOT))).expanduser().resolve()
     if not root.is_dir():
         raise SystemExit(f"数据目录不存在或不是文件夹: {root}")
@@ -1607,7 +1616,8 @@ def build_config(data_root: Path | None = None, **overrides: Any) -> AppConfig:
             15,
             int(overrides.get("request_timeout_seconds") or os.environ.get("ALGO_REQUEST_TIMEOUT", "120")),
         ),
-        max_concurrent_tests=max(1, min(32, int(overrides.get("max_concurrent_tests") or os.environ.get("ALGO_MAX_TESTS", "6")))),
+        max_concurrent_tests=max(1, min(32, int(overrides.get("max_concurrent_tests") or os.environ.get("ALGO_MAX_TESTS", "8")))),
+        test_cpu_threads=test_cpu_threads,
     )
 
 
@@ -1622,7 +1632,43 @@ def discover_lan_ip() -> str:
         sock.close()
 
 
+def load_env_file(path: Path) -> None:
+    """Read literal ALGO_* settings; never execute shell code or expand values.
+
+    Explicit process environment takes precedence over the local file. This is
+    called only by the CLI, not by isolated test servers using build_config().
+    """
+    import shlex
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except FileNotFoundError:
+        return
+    except (OSError, UnicodeError) as exc:
+        raise SystemExit(f"无法读取本地启动配置：{path}") from exc
+    settings = {}
+    for number, raw in enumerate(lines, 1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].strip()
+        key, separator, value = line.partition("=")
+        key = key.strip()
+        if not separator or not re.fullmatch(r"ALGO_[A-Z0-9_]+", key):
+            raise SystemExit(f"启动配置第 {number} 行格式无效；只允许 ALGO_* 变量")
+        try:
+            parts = shlex.split(value, comments=True)
+        except ValueError as exc:
+            raise SystemExit(f"启动配置第 {number} 行引号格式无效") from exc
+        if len(parts) > 1:
+            raise SystemExit(f"启动配置第 {number} 行包含空格的值必须使用引号")
+        settings[key] = parts[0] if parts else ""
+    for key, value in settings.items():
+        os.environ.setdefault(key, value)
+
+
 def main() -> None:
+    load_env_file(Path(os.environ.get("ALGO_ENV_FILE", APP_DIR / ".env")))
     parser = argparse.ArgumentParser(description="算法文件管理网页")
     parser.add_argument("--host", default=os.environ.get("ALGO_HOST", "0.0.0.0"))
     parser.add_argument("--port", type=int, default=int(os.environ.get("ALGO_PORT", "8080")))
@@ -1630,6 +1676,8 @@ def main() -> None:
     args = parser.parse_args()
     os.umask(0o027)
     config = build_config(args.root)
+    if config.password_hash == DEFAULT_PASSWORD_HASH:
+        raise SystemExit("拒绝使用已公开的旧默认凭据启动。请先在本地 .env 配置 ALGO_USERNAME 和 ALGO_PASSWORD（或 ALGO_PASSWORD_HASH）。")
     if config.operation_log == APP_DIR / "operations.log":
         migrate_legacy_operation_log(APP_DIR / "audit.log", config.operation_log)
     server = AlgorithmServer((args.host, args.port), config)
@@ -1642,8 +1690,6 @@ def main() -> None:
     print(f"数据目录: {config.data_root}", flush=True)
     print(f"本机访问: http://127.0.0.1:{port}", flush=True)
     print(f"局域网访问: http://{shown_host}:{port}", flush=True)
-    if config.password_hash == DEFAULT_PASSWORD_HASH:
-        print("提示: 正在使用文档中配置的默认登录账号。可通过环境变量覆盖。", flush=True)
     try:
         server.serve_forever(poll_interval=0.5)
     except KeyboardInterrupt:

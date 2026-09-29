@@ -175,8 +175,8 @@
           <button id="test-stop" class="button secondary small" type="button" disabled>■ 停止</button>
         </div>
       </section>
-      <div class="test-layout">
-        <aside class="test-files-panel">
+      <div id="test-layout" class="test-layout">
+        <aside id="test-files-panel" class="test-files-panel">
           <div class="test-panel-heading"><strong>运行文件</strong><button id="test-files-refresh" class="button subtle small" type="button">刷新</button></div>
           <label class="test-archive-label" for="test-archive">Docker 镜像包</label>
           <select id="test-archive" aria-label="Docker 镜像包"></select>
@@ -186,13 +186,17 @@
           <button id="test-file-manager" class="button secondary small" type="button">在文件管理中打开</button>
           <p class="test-file-note">说明文档已隐藏。运行期间每 3 秒刷新当前目录；点击文件可预览。</p>
         </aside>
+        <div id="test-splitter" class="test-splitter" role="separator" tabindex="0"
+          aria-label="调整运行文件与终端宽度" aria-orientation="vertical" aria-controls="test-files-panel"
+          aria-valuemin="240" aria-valuemax="900" aria-valuenow="360"
+          title="左右拖动调整宽度，双击恢复默认；方向键可微调"></div>
         <section class="test-terminal-panel" aria-label="Docker 交互式终端">
           <div class="test-terminal-heading"><span><i class="terminal-light"></i> Docker Terminal</span><span id="test-connection">实时终端</span></div>
           <div id="test-terminal"></div>
           <div class="test-terminal-footer"><span>点击终端输入 · Enter 发送 · 支持 Ctrl+C</span><button id="test-interrupt" type="button">发送 Ctrl+C</button></div>
         </section>
       </div>
-      <p class="test-page-note">关闭测试页或浏览器不会停止任务。可从右上角后台任务重新连接；同一算法只允许一个任务，不同算法最多同时运行 <span id="test-limit">6</span> 个。GPU 可共享，但不隔离显存配额。</p>
+      <p class="test-page-note">关闭测试页或浏览器不会停止任务。可从右上角后台任务重新连接；同一算法只允许一个任务，不同算法最多同时运行 <span id="test-limit">8</span> 个。GPU 可共享，但不隔离显存配额。</p>
     </main>
     </div>
   </div>

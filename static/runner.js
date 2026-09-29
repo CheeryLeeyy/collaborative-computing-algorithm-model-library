@@ -4,7 +4,9 @@
 const Runner = {
   active: false, path: "", relative: "", page: 1, gpu: "all", info: null,
   jobs: [], jobId: "", offset: 0, serial: 0, filesSerial: 0, term: null, fit: null,
+  filesPending: 0, filesRefreshQueued: false, finishedFilesJobs: new Set(),
   polling: false, outputPolling: false, inputQueue: Promise.resolve(), starting: false,
+  filePanelWidth: 360, splitDrag: null, splitStorageKey: "kt1.test.filesWidth",
   activeStates: new Set(["preparing", "loading", "creating", "running", "stopping", "cleanup_failed"]),
   labels: {preparing: "准备中", loading: "加载镜像", creating: "创建容器", running: "运行中", stopping: "停止中", succeeded: "已完成", failed: "失败", stopped: "已停止", cleanup_failed: "清理失败，请重试停止"},
 
@@ -15,6 +17,7 @@ const Runner = {
     return apiRequest(`/api/tests/${action}?${new URLSearchParams(params)}`);
   },
   init() {
+    this.initSplitter();
     byId("algorithm-test-button").onclick = () => this.open(state.currentPath.split("/")[0]);
     byId("test-start").onclick = () => this.start();
     byId("test-stop").onclick = () => this.stop(this.jobId);
@@ -29,12 +32,11 @@ const Runner = {
       this.buttons();
     };
     byId("test-up").onclick = () => {
-      this.relative = this.relative.split("/").slice(0, -1).join("/");
-      this.page = 1; this.files();
+      this.files(false, {relative: this.relative.split("/").slice(0, -1).join("/"), page: 1});
     };
     byId("test-files-refresh").onclick = () => this.files();
-    byId("test-files-prev").onclick = () => {this.page -= 1; this.files();};
-    byId("test-files-next").onclick = () => {this.page += 1; this.files();};
+    byId("test-files-prev").onclick = () => this.files(false, {page: this.page - 1});
+    byId("test-files-next").onclick = () => this.files(false, {page: this.page + 1});
     byId("test-file-manager").onclick = () => navigateTo(joinPath(this.path, this.relative).replace(/\/$/, ""));
     window.setInterval(() => this.pollJobs(), 1500);
     window.setInterval(() => this.pollOutput(), 300);
@@ -48,6 +50,81 @@ const Runner = {
         this.resizeTimer = setTimeout(() => this.resize(), 200);
       }
     }).observe(byId("test-terminal"));
+  },
+  initSplitter() {
+    const splitter = byId("test-splitter");
+    try {
+      const saved = Number(localStorage.getItem(this.splitStorageKey));
+      if (Number.isFinite(saved) && saved >= 240 && saved <= 10000) this.filePanelWidth = saved;
+    } catch (_) { /* Storage can be disabled; resizing still works. */ }
+    splitter.addEventListener("pointerdown", event => {
+      if (event.button !== 0 || this.splitDrag || !this.active || window.matchMedia("(max-width: 700px)").matches) return;
+      event.preventDefault();
+      this.splitDrag = {id: event.pointerId, x: event.clientX, width: byId("test-files-panel").getBoundingClientRect().width};
+      splitter.setPointerCapture(event.pointerId);
+      splitter.focus({preventScroll: true});
+      document.body.classList.add("test-split-dragging");
+    });
+    splitter.addEventListener("pointermove", event => {
+      if (!this.splitDrag || this.splitDrag.id !== event.pointerId) return;
+      this.setFilePanelWidth(this.splitDrag.width + event.clientX - this.splitDrag.x);
+    });
+    for (const type of ["pointerup", "pointercancel", "lostpointercapture"]) {
+      splitter.addEventListener(type, event => {
+        if (this.splitDrag && this.splitDrag.id === event.pointerId) this.finishSplit();
+      });
+    }
+    window.addEventListener("blur", () => this.finishSplit());
+    splitter.addEventListener("dblclick", () => {
+      this.filePanelWidth = 360;
+      this.syncSplit(); this.saveSplit();
+    });
+    splitter.addEventListener("keydown", event => {
+      const bounds = this.splitBounds();
+      const current = byId("test-files-panel").getBoundingClientRect().width;
+      const widths = {ArrowLeft: current - 20, ArrowRight: current + 20, Home: bounds.min, End: bounds.max};
+      if (!(event.key in widths)) return;
+      event.preventDefault();
+      this.setFilePanelWidth(widths[event.key]); this.saveSplit();
+    });
+    new ResizeObserver(() => this.syncSplit()).observe(byId("test-layout"));
+  },
+  splitBounds() {
+    const available = Math.max(0, byId("test-layout").clientWidth - byId("test-splitter").getBoundingClientRect().width);
+    const min = Math.min(240, Math.floor(available / 2));
+    return {min, max: Math.max(min, available - 320)};
+  },
+  setFilePanelWidth(width) {
+    const bounds = this.splitBounds();
+    this.filePanelWidth = Math.round(Math.max(bounds.min, Math.min(bounds.max, width)));
+    this.syncSplit();
+  },
+  syncSplit() {
+    if (!this.active || window.matchMedia("(max-width: 700px)").matches) {
+      this.finishSplit(); return;
+    }
+    const bounds = this.splitBounds();
+    const width = Math.round(Math.max(bounds.min, Math.min(bounds.max, this.filePanelWidth)));
+    byId("test-layout").style.setProperty("--test-files-width", width + "px");
+    const splitter = byId("test-splitter");
+    splitter.setAttribute("aria-valuemin", bounds.min);
+    splitter.setAttribute("aria-valuemax", bounds.max);
+    splitter.setAttribute("aria-valuenow", width);
+    splitter.setAttribute("aria-valuetext", `运行文件宽度 ${width} 像素`);
+    // Do not replace the preference when a smaller viewport temporarily clamps it.
+    // The terminal ResizeObserver fits xterm and sends the new PTY dimensions.
+  },
+  saveSplit() {
+    try {localStorage.setItem(this.splitStorageKey, String(this.filePanelWidth));} catch (_) { /* Optional preference. */ }
+  },
+  finishSplit() {
+    if (!this.splitDrag) return;
+    const id = this.splitDrag.id;
+    this.splitDrag = null;
+    document.body.classList.remove("test-split-dragging");
+    const splitter = byId("test-splitter");
+    if (splitter.hasPointerCapture(id)) splitter.releasePointerCapture(id);
+    this.saveSplit();
   },
   reset() {
     this.leave(); this.jobs = []; this.jobId = ""; this.jobsSignature = null;
@@ -72,6 +149,8 @@ const Runner = {
       const info = await this.query("info", {path});
       if (serial !== this.serial || !state.authenticated) return;
       this.info = info; this.path = path; this.relative = ""; this.page = 1;
+      this.filesSerial += 1; this.filesPending = 0; this.filesRefreshQueued = false;
+      this.finishedFilesJobs.clear();
       this.gpu = "all";
       this.jobId = ""; this.offset = 0;
       this.outputGeneration = (this.outputGeneration || 0) + 1;
@@ -82,6 +161,7 @@ const Runner = {
       state.currentPath = path;
       show(byId("file-manager-view"), false);
       show(byId("test-view"), true);
+      this.syncSplit();
       renderAlgorithms();
       closeSidebar();
       byId("test-title").textContent = path + " · 算法测试";
@@ -102,8 +182,10 @@ const Runner = {
     }
   },
   leave() {
+    this.finishSplit();
     const was = this.active;
     this.serial += 1; this.filesSerial += 1; this.active = false;
+    this.filesPending = 0; this.filesRefreshQueued = false;
     show(byId("test-view"), false);
     show(byId("file-manager-view"), true);
     return was;
@@ -155,6 +237,8 @@ const Runner = {
         if (running) this.attach(running.id);
       }
       this.buttons();
+      // Another device may run this algorithm while this terminal shows an old job.
+      this.refreshFinishedFiles(this.jobs.find(j => j.algorithm === this.path));
     } catch (error) {
       if (error.status !== 401) byId("running-summary").textContent = "后台任务 · 连接中断";
     } finally {this.polling = false;}
@@ -213,6 +297,7 @@ const Runner = {
       if (index >= 0) this.jobs[index] = result.job;
       byId("test-connection").textContent = this.isActive(result.job) ? "● 已连接 · 实时更新" : "任务已结束 · 输出可回看";
       this.buttons();
+      this.refreshFinishedFiles(result.job);
     } catch (error) {
       if (error.status !== 401) byId("test-connection").textContent = "连接中断，正在重连…";
     } finally {this.outputPolling = false;}
@@ -281,20 +366,56 @@ const Runner = {
   },
   async clearOutput() {
     if (!window.confirm(`将永久删除 ${this.path}/output 内的全部文件和子文件夹，保留 output 目录。此操作不可恢复，确认清空？`)) return;
+    const path = this.path, viewSerial = this.serial;
     try {
-      const result = await this.post("clear-output", {path: this.path, confirmed: true});
+      const result = await this.post("clear-output", {path, confirmed: true});
       toast(`已清空 output，删除 ${result.removed} 项（不可恢复）`);
-      this.files(); loadSystem();
-    } catch (error) {window.alert(error.message);}
+    } catch (error) {window.alert(error.message);} finally {
+      if (this.active && this.path === path && this.serial === viewSerial) {
+        const relative = this.relative === "output" || this.relative.startsWith("output/") ? "output" : this.relative;
+        this.files(false, {relative, page: 1}); loadSystem();
+      }
+    }
   },
-  async files(quiet = false) {
+  refreshFinishedFiles(job) {
+    if (!this.active || !job || job.algorithm !== this.path || this.isActive(job) || this.finishedFilesJobs.has(job.id)) return;
+    this.finishedFilesJobs.add(job.id);
+    // Algorithms can rename/remove intermediate output folders right before exit.
+    this.files(true);
+  },
+  async files(quiet = false, options = {}) {
     if (!this.active || !state.authenticated) return;
+    // Background refresh must not supersede an in-flight user navigation.
+    if (quiet && this.filesPending) {this.filesRefreshQueued = true; return;}
     const serial = ++this.filesSerial;
+    const path = this.path, viewSerial = this.serial;
+    let relative = options.relative === undefined ? this.relative : options.relative;
+    let page = options.page === undefined ? this.page : options.page;
+    let recovered = false;
+    this.filesPending = serial;
+    const current = () => serial === this.filesSerial && viewSerial === this.serial && path === this.path && this.active && state.authenticated;
     try {
-      const result = await this.query("files", {path: this.path, relative: this.relative, page: this.page});
-      if (serial !== this.filesSerial || !this.active) return;
+      let result;
+      for (;;) {
+        try {result = await this.query("files", {path, relative, page});} catch (error) {
+          if (!current()) return;
+          if (relative && [400, 403, 404].includes(error.status)) {
+            relative = relative.split("/").slice(0, -1).join("/");
+            page = 1; recovered = true; continue;
+          }
+          throw error;
+        }
+        if (!current()) return;
+        const last = Math.max(1, Math.ceil(result.total / 100));
+        if (page > last) {page = last; continue;}
+        break;
+      }
+      // Commit the location only after it has loaded successfully. Old rows
+      // always retain their own absolute destination while another fetch waits.
+      this.relative = relative; this.page = page;
       const target = byId("test-files");
-      const signature = JSON.stringify([this.path, this.relative, result]);
+      const signature = JSON.stringify([path, relative, result]);
+      if (recovered && !quiet) toast("目录已变化或暂不可访问，已刷新到 /" + relative);
       if (signature === this.filesSignature) return;
       this.filesSignature = signature;
       target.replaceChildren();
@@ -312,14 +433,21 @@ const Runner = {
         cell.append(makeFileIcon(entry), name);
         row.append(cell, size);
         name.onclick = () => {
-          if (entry.kind === "directory") {this.relative = joinPath(this.relative, entry.name); this.page = 1; this.files();}
+          if (entry.kind === "directory") this.files(false, {relative: entry.path.slice(path.length + 1), page: 1});
           else openPreview({...entry, modified: new Date(entry.modified * 1000).toISOString()});
         };
         target.append(row);
       }
       if (!result.entries.length) target.textContent = "此目录没有运行文件";
     } catch (error) {
-      if (!quiet && error.status !== 401) toast(error.message, "error");
+      if (current() && !quiet && error.status !== 401) toast(error.message, "error");
+    } finally {
+      if (this.filesPending === serial) {
+        this.filesPending = 0;
+        const refresh = this.filesRefreshQueued;
+        this.filesRefreshQueued = false;
+        if (refresh && current()) this.files(true);
+      }
     }
   },
 };

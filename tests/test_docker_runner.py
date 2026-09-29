@@ -1,4 +1,6 @@
 import base64
+import copy
+import hashlib
 import io
 import json
 import os
@@ -9,6 +11,7 @@ import unittest
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from subprocess import CompletedProcess
 from unittest.mock import patch
 
 from docker_runner import ACTIVE, DockerRunner, Job, RunnerError
@@ -86,6 +89,33 @@ class RunnerTests(unittest.TestCase):
             with self.assertRaises(RunnerError):
                 self.runner.plan("algo-test", "algo-test.tar", gpu)
 
+    def test_runtime_thread_budget_preserves_gpu_and_entrypoint(self):
+        plan = self.runner.plan("algo-test", "algo-test.tar", "1")
+        keys = ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "OPENCV_FOR_THREADS_NUM")
+        self.assertEqual(plan["environment"], dict.fromkeys(keys, "2"))
+        args = self.runner.create_args(plan, "example")
+        for key in keys:
+            self.assertIn(key + "=2", args)
+        self.assertEqual(plan["device"], "GPU-one")
+        self.assertEqual(plan["container_command"], [])
+        self.runner.cpu_threads = 0
+        self.assertEqual(self.runner.plan("algo-test", "algo-test.tar")["environment"], {})
+        for invalid in (-1, 257, "2", True):
+            with self.assertRaises(ValueError):
+                DockerRunner(self.root, cpu_threads=invalid)
+
+    def test_explicit_historical_thread_budget_is_not_overwritten(self):
+        history = {"options": {}, "environment": {"OMP_NUM_THREADS": "1", "EPOCHS": "1"},
+                   "command": ["python", "main.py", "--epochs", "1"], "unsupported": []}
+        original = copy.deepcopy(history)
+        self.runner.verified["algo-test"] = history
+        plan = self.runner.plan("algo-test", "algo-test.tar")
+        self.assertEqual(plan["environment"]["OMP_NUM_THREADS"], "1")
+        self.assertEqual(plan["environment"]["MKL_NUM_THREADS"], "2")
+        self.assertEqual(plan["environment"]["EPOCHS"], "1")
+        self.assertEqual(plan["container_command"], history["command"])
+        self.assertEqual(history, original)
+
     def test_dangerous_params_rejected(self):
         for params in ({"privileged": True}, {"volume": "/:/host"}, {"env": {"NVIDIA_VISIBLE_DEVICES": "all"}},
                        {"shm-size": "1g;bad"}, {"pids-limit": -1}, {"cpus": 0}, []):
@@ -122,6 +152,130 @@ class RunnerTests(unittest.TestCase):
             tar.addfile(entry, io.BytesIO(data))
         self.assertEqual(self.runner.plan("algo-test", "algo-test.tar")["image"], "sha256:" + "b"*64)
 
+    def cache_fixture(self):
+        plan = self.runner.plan("algo-test", "algo-test.tar", "none")
+        config = {"architecture": "amd64", "os": "linux", "created": "2026-01-01T00:00:00Z",
+                  "config": {"Env": ["MODE=one"], "Cmd": ["python", "main.py"], "User": "1000", "OnBuild": None},
+                  "rootfs": {"type": "layers", "diff_ids": ["sha256:" + "b" * 64]}}
+        plan["_archive_config"] = (plan["image"], config)
+        image = {"Id": "sha256:" + "c" * 64, "Architecture": "amd64", "Os": "linux", "Created": config["created"],
+                 "Config": {k: v for k, v in config["config"].items() if v is not None},
+                 "RootFS": {"Type": "layers", "Layers": config["rootfs"]["diff_ids"]}}
+        return plan, config, image
+
+    def test_cached_digest_omits_load_and_ignores_tag(self):
+        plan, _, image = self.cache_fixture()
+        image["Id"] = plan["image"]
+        with patch.object(self.runner, "command", return_value=CompletedProcess([], 0, json.dumps([image]), "")) as cmd:
+            preview = self.runner.preview(plan)
+        cmd.assert_called_once_with(["image", "inspect", plan["image"]])
+        self.assertTrue(preview["image_cached"])
+        self.assertEqual(len(preview["commands"]), 3)
+        self.assertTrue(preview["commands"][0].startswith("docker create "))
+        self.assertNotIn("docker load ", "\n".join(preview["commands"]))
+
+    def test_classic_archive_matches_containerd_without_original_tag(self):
+        plan, _, image = self.cache_fixture()
+        def command(args, **kwargs):
+            if args == ["image", "ls", "--all", "--quiet", "--no-trunc"]:
+                return CompletedProcess(args, 0, image["Id"] + "\n", "")
+            if args == ["image", "inspect", image["Id"]]:
+                return CompletedProcess(args, 0, json.dumps([image]), "")
+            return CompletedProcess(args, 1, "[]", "Error: No such image")
+        with patch.object(self.runner, "command", side_effect=command):
+            preview = self.runner.preview(plan)
+        self.assertTrue(preview["image_cached"])
+        self.assertEqual(plan["image"], image["Id"])
+        self.assertIn(image["Id"], preview["commands"][0])
+        self.assertNotIn("docker load ", "\n".join(preview["commands"]))
+
+    def test_cache_comparison_rejects_different_layers_or_runtime_config(self):
+        _, config, image = self.cache_fixture()
+        changes = [("Config", "Env", ["MODE=two"]), ("Config", "User", "0"),
+                   ("Config", "Cmd", ["other.py"]), ("RootFS", "Layers", ["sha256:" + "d" * 64])]
+        for section, key, value in changes:
+            with self.subTest(key=key):
+                changed = copy.deepcopy(image); changed[section][key] = value
+                self.assertFalse(self.runner.same_runtime_image(config, changed))
+        with_labels = copy.deepcopy(config); with_labels["config"]["Labels"] = {"version": ""}
+        self.assertFalse(self.runner.same_runtime_image(with_labels, image))
+        changed = copy.deepcopy(image); changed["Architecture"] = "arm64"
+        self.assertFalse(self.runner.same_runtime_image(config, changed))
+        self.assertTrue(self.runner.same_runtime_image(config, image))
+
+    def test_different_image_with_same_tag_still_requires_load(self):
+        plan, _, image = self.cache_fixture()
+        image["RepoTags"] = plan["tags"]
+        image["Config"]["Env"] = ["MODE=other"]
+        def command(args, **kwargs):
+            if args[:2] == ["image", "ls"]:
+                return CompletedProcess(args, 0, image["Id"], "")
+            if args == ["image", "inspect", image["Id"]]:
+                return CompletedProcess(args, 0, json.dumps([image]), "")
+            return CompletedProcess(args, 1, "[]", "No such image")
+        with patch.object(self.runner, "command", side_effect=command):
+            preview = self.runner.preview(plan)
+        self.assertFalse(preview["image_cached"])
+        self.assertTrue(preview["commands"][0].startswith("docker load --input "))
+
+    def test_oci_config_digest_can_match_classic_store(self):
+        plan, _, image = self.cache_fixture()
+        config_id = plan["image"]
+        plan["image"] = "sha256:" + "e" * 64
+        image["Id"] = config_id
+        with patch.object(self.runner, "command", side_effect=[CompletedProcess([], 1, "[]", "No such image"),
+                                                               CompletedProcess([], 0, json.dumps([image]), "")]):
+            self.assertTrue(self.runner.image_cached(plan))
+        self.assertEqual(plan["image"], config_id)
+
+    def test_cache_unavailable_is_not_treated_as_a_missing_image(self):
+        plan, _, _ = self.cache_fixture()
+        with patch.object(self.runner, "command", return_value=CompletedProcess([], 1, "", "permission denied")):
+            with self.assertRaisesRegex(RunnerError, "无法检查"):
+                self.runner.preview(plan)
+
+    def test_runtime_rechecks_cache_after_preview(self):
+        for preview_cached, start_cached in [(True, True), (True, False), (False, True), (False, False)]:
+            with self.subTest(preview=preview_cached, start=start_cached):
+                plan, _, _ = self.cache_fixture()
+                cached = [preview_cached]
+                def pty(job, args, **kwargs):
+                    if args[0] == "load": cached[0] = True
+                    return 0
+                with patch.object(self.runner, "image_cached", side_effect=lambda plan: cached[0]), \
+                     patch.object(self.runner, "command", return_value=CompletedProcess([], 0, "0", "")), \
+                     patch.object(self.runner, "_pty", side_effect=pty) as calls, \
+                     patch.object(self.runner, "_remove_owned"):
+                    preview = self.runner.preview(plan)
+                    self.assertEqual(preview["image_cached"], preview_cached)
+                    cached[0] = start_cached
+                    job = Job(plan, "bupt", "test")
+                    DockerRunner._work(self.runner, job)
+                self.assertEqual(job.status, "succeeded", job.error)
+                self.assertEqual(sum(call.args[1][0] == "load" for call in calls.call_args_list), int(not start_cached))
+
+    def test_archive_config_hash_is_verified(self):
+        plan, config, _ = self.cache_fixture()
+        raw = json.dumps(config).encode()
+        digest = hashlib.sha256(raw).hexdigest()
+        with tarfile.open(self.folder / "algo-test.tar", "a") as tar:
+            manifest = json.dumps([{"Config": digest + ".json", "RepoTags": [], "Layers": []}]).encode()
+            for name, data in [("manifest.json", manifest), (digest + ".json", raw)]:
+                member = tarfile.TarInfo(name); member.size = len(data); tar.addfile(member, io.BytesIO(data))
+        plan = self.runner.plan("algo-test", "algo-test.tar", "none")
+        self.assertEqual(self.runner.archive_config(plan), ("sha256:" + digest, config))
+        with tarfile.open(self.folder / "algo-test.tar", "a") as tar:
+            member = tarfile.TarInfo(digest + ".json"); member.size = 2; tar.addfile(member, io.BytesIO(b"{}"))
+        # Small tar appends can retain the padded size and occur in one filesystem
+        # timestamp tick. Make this metadata-change assertion deterministic.
+        archive = self.folder / "algo-test.tar"
+        os.utime(archive, ns=(archive.stat().st_atime_ns, plan["fingerprint"][3] + 1_000_000_000))
+        with self.assertRaisesRegex(RunnerError, "镜像文件已变化"):
+            self.runner.archive_config({k: v for k, v in plan.items() if k != "_archive_config"})
+        plan = self.runner.plan("algo-test", "algo-test.tar", "none")
+        with self.assertRaisesRegex(RunnerError, "无法校验"):
+            self.runner.archive_config(plan)
+
     def test_same_algorithm_atomic_across_devices(self):
         barrier = threading.Barrier(12)
         def attempt(_):
@@ -154,6 +308,7 @@ class RunnerTests(unittest.TestCase):
         job = Job(plan, "bupt", "device-a")
         self.runner.jobs[job.id] = job
         with patch.object(self.runner, "command", return_value=CompletedProcess([], 0, "0", "")), \
+             patch.object(self.runner, "image_cached", return_value=True), \
              patch.object(self.runner, "_pty", return_value=0), \
              patch.object(self.runner, "_remove_owned", side_effect=RunnerError(503, "daemon unavailable")):
             DockerRunner._work(self.runner, job)
@@ -162,14 +317,15 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaises(RunnerError): self.start()
         job.status = "failed"
 
-    def test_parallel_limit_six(self):
-        for i in range(7): make_algorithm(self.root, f"algo-{i}")
+    def test_parallel_limit_eight(self):
+        self.assertEqual(self.runner.max_jobs, 8)
+        for i in range(9): make_algorithm(self.root, f"algo-{i}")
         def attempt(i):
             try: return self.start(f"algo-{i}", str(i % 2))
             except RunnerError as exc: return exc.code
-        with ThreadPoolExecutor(max_workers=7) as pool:
-            results = list(pool.map(attempt, range(7)))
-        self.assertEqual(sum(isinstance(r, dict) for r in results), 6)
+        with ThreadPoolExecutor(max_workers=9) as pool:
+            results = list(pool.map(attempt, range(9)))
+        self.assertEqual(sum(isinstance(r, dict) for r in results), 8)
         self.assertIn("runner_full", results)
 
     def test_mutations_and_output_locked_while_running(self):

@@ -50,7 +50,9 @@ def main():
     shutil.copy2(source / "params.json", actual / "params.json")
     shutil.copy2(source / (source.name + "测试说明.docx"), actual)
     subprocess.run(["cp", "--reflink=auto", str(source / (source.name + ".tar")), str(actual)], check=True)
-    config = build_config(root, min_free_bytes=0, operation_log=artifact / "operations.log")
+    # Explicit six-task fixture; the deployed default may be higher.
+    config = build_config(root, min_free_bytes=0, operation_log=artifact / "operations.log",
+                          max_concurrent_tests=6, test_cpu_threads=2)
     server = AlgorithmServer(("127.0.0.1", 0), config)
     thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
     url = f"http://127.0.0.1:{server.server_port}"
@@ -128,11 +130,20 @@ def main():
             assert "device=GPU-" in page.locator("#test-command-text").inner_text()
             preview_text = page.locator("#test-command-text").inner_text()
             assert all(line.startswith("docker ") for line in preview_text.splitlines() if line.strip())
+            assert "docker load " not in preview_text  # Fixture image was already built locally.
             assert page.locator("#test-command-note").count() == 0
             page.locator("#test-command-dialog .modal-footer button").click()
             page.locator("#test-start").click()
             jid = wait_for(lambda: page.evaluate("Runner.jobId"), message="job start")
             wait_for(lambda: "READY" in output(jid), message="PTY readiness")
+            inspect = subprocess.run(["docker", "inspect", job(jid)["container"]],
+                                     text=True, capture_output=True, check=True)
+            environment = json.loads(inspect.stdout)[0]["Config"]["Env"]
+            assert all(key + "=2" in environment for key in (
+                "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "OPENCV_FOR_THREADS_NUM"))
+            passed("configured CPU thread pool defaults reach the actual Docker container")
+            assert "$ docker load " not in output(jid)
+            passed("cached fixture digest omits load from both preview and actual execution")
             started = json.loads((root / "smoke-0/output/started.json").read_text())
             physical = server.runner.gpus()["gpus"]
             assert started["gpus"] == [next(g["uuid"] for g in physical if g["index"] == "1")], started

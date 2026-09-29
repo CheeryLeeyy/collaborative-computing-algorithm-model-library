@@ -5,8 +5,8 @@
   "note": "Historical success is not a guarantee for modified archives or inputs. GPU and mount paths are always supplied by the current website job.",
   "algorithms": {
     "algo1-4-j-1": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-1/default/run.json",
-      "started_at": "2026-09-10T08:36:55.849583+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-1/default/run.json",
+      "started_at": "2026-09-13T18:23:10.670685+00:00",
       "case": "default",
       "image": "algo1-4-j-1:v1",
       "options": {},
@@ -17,8 +17,8 @@
       "unsupported": []
     },
     "algo1-4-j-2": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-2/default/run.json",
-      "started_at": "2026-09-10T08:36:55.849865+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-2/default/run.json",
+      "started_at": "2026-09-13T18:23:12.124395+00:00",
       "case": "default",
       "image": "algo1-4-j-2:v1",
       "options": {},
@@ -29,8 +29,8 @@
       "unsupported": []
     },
     "algo1-4-j-3": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-3/default/run.json",
-      "started_at": "2026-09-10T08:36:57.183546+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-3/default/run.json",
+      "started_at": "2026-09-13T18:23:12.847445+00:00",
       "case": "default",
       "image": "algo1-4-j-3:v1",
       "options": {},
@@ -41,8 +41,8 @@
       "unsupported": []
     },
     "algo1-4-j-4": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-4/default/run.json",
-      "started_at": "2026-09-10T08:36:57.290583+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-4/default/run.json",
+      "started_at": "2026-09-13T18:23:13.609605+00:00",
       "case": "default",
       "image": "algo1-4-j-4:v1",
       "options": {},
@@ -53,8 +53,8 @@
       "unsupported": []
     },
     "algo1-4-j-5": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-5/default/run.json",
-      "started_at": "2026-09-10T08:36:57.771603+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-5/default/run.json",
+      "started_at": "2026-09-13T18:23:14.328149+00:00",
       "case": "default",
       "image": "algo1-4-j-5:v1",
       "options": {},
@@ -65,8 +65,8 @@
       "unsupported": []
     },
     "algo1-4-j-6": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-6/default/run.json",
-      "started_at": "2026-09-10T08:36:57.964906+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-6/default/run.json",
+      "started_at": "2026-09-13T18:23:14.925684+00:00",
       "case": "default",
       "image": "algo1-4-j-6:v1",
       "options": {},
@@ -77,8 +77,8 @@
       "unsupported": []
     },
     "algo1-4-j-7": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-7/default/run.json",
-      "started_at": "2026-09-10T08:36:58.360745+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-7/default/run.json",
+      "started_at": "2026-09-13T18:23:15.415489+00:00",
       "case": "default",
       "image": "algo1-4-j-7:v1",
       "options": {},
@@ -89,8 +89,8 @@
       "unsupported": []
     },
     "algo1-4-j-8": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-8/default/run.json",
-      "started_at": "2026-09-10T08:36:58.555845+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-8/default/run.json",
+      "started_at": "2026-09-13T18:23:15.903813+00:00",
       "case": "default",
       "image": "algo1-4-j-8:v1",
       "options": {},
@@ -101,8 +101,8 @@
       "unsupported": []
     },
     "algo1-4-j-9": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-9/default/run.json",
-      "started_at": "2026-09-10T08:36:58.945508+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-9/default/run.json",
+      "started_at": "2026-09-13T18:23:16.374690+00:00",
       "case": "default",
       "image": "algo1-4-j-9:v1",
       "options": {},
@@ -113,8 +113,8 @@
       "unsupported": []
     },
     "algo1-4-j-10": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-10/default/run.json",
-      "started_at": "2026-09-10T08:36:59.198290+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-10/default/run.json",
+      "started_at": "2026-09-13T18:23:17.971148+00:00",
       "case": "default",
       "image": "algo1-4-j-10:v1",
       "options": {},
@@ -125,9 +125,9 @@
       "unsupported": []
     },
     "algo1-4-j-11": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-11/fixed-params/run.json",
-      "started_at": "2026-09-10T08:42:53.842837+00:00",
-      "case": "fixed-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-11/default/run.json",
+      "started_at": "2026-09-13T18:23:18.570796+00:00",
+      "case": "default",
       "image": "algo1-4-j-11:v1",
       "options": {
         "shm-size": "16g"
@@ -139,9 +139,9 @@
       "unsupported": []
     },
     "algo1-4-j-12": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-12/current-params/run.json",
-      "started_at": "2026-09-10T08:42:20.429935+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-12/default/run.json",
+      "started_at": "2026-09-13T18:27:16.031536+00:00",
+      "case": "default",
       "image": "algo1-4-j-12:v1",
       "options": {
         "gpus": "all",
@@ -154,12 +154,12 @@
       "unsupported": []
     },
     "algo1-4-j-13": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-13/fixed-params/run.json",
-      "started_at": "2026-09-10T08:41:24.276554+00:00",
-      "case": "fixed-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-13/parallel/run.json",
+      "started_at": "2026-09-13T18:34:13.907057+00:00",
+      "case": "default",
       "image": "algo1-4-j-13:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -169,8 +169,8 @@
       "unsupported": []
     },
     "algo1-4-j-14": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-14/default/run.json",
-      "started_at": "2026-09-10T08:39:11.423392+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-14/parallel/run.json",
+      "started_at": "2026-09-13T18:34:13.987189+00:00",
       "case": "default",
       "image": "algo1-4-j-14:v1",
       "options": {
@@ -183,12 +183,12 @@
       "unsupported": []
     },
     "algo1-4-j-15": {
-      "record": "docker_retest_1_15_20260910/evidence/runs/algo1-4-j-15/default/run.json",
-      "started_at": "2026-09-10T08:40:26.446081+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-15/parallel/run.json",
+      "started_at": "2026-09-13T18:34:59.038984+00:00",
       "case": "default",
       "image": "algo1-4-j-15:v1",
       "options": {
-        "gpus": "device=0"
+        "gpus": "device=1"
       },
       "environment": {},
       "command": [],
@@ -197,12 +197,12 @@
       "unsupported": []
     },
     "algo1-4-j-16": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-16/default/run.json",
-      "started_at": "2026-08-12T12:49:24.281452+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-16/parallel/run.json",
+      "started_at": "2026-09-13T18:35:15.288475+00:00",
       "case": "default",
       "image": "algo1-4-j-16:v1",
       "options": {
-        "gpus": "device=0"
+        "gpus": "device=1"
       },
       "environment": {},
       "command": [],
@@ -211,12 +211,12 @@
       "unsupported": []
     },
     "algo1-4-j-17": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-17/default/run.json",
-      "started_at": "2026-08-12T12:49:24.278046+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-17/parallel/run.json",
+      "started_at": "2026-09-13T18:35:33.223701+00:00",
       "case": "default",
       "image": "algo1-4-j-17:v1",
       "options": {
-        "gpus": "device=1"
+        "gpus": "device=0"
       },
       "environment": {},
       "command": [],
@@ -225,12 +225,12 @@
       "unsupported": []
     },
     "algo1-4-j-18": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-18/default/run.json",
-      "started_at": "2026-08-12T12:51:15.766443+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-18/parallel/run.json",
+      "started_at": "2026-09-13T18:35:48.758394+00:00",
       "case": "default",
       "image": "algo1-4-j-18:v1",
       "options": {
-        "gpus": "device=0",
+        "gpus": "device=1",
         "shm-size": "8g"
       },
       "environment": {},
@@ -240,8 +240,8 @@
       "unsupported": []
     },
     "algo1-4-j-19": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-19/default/run.json",
-      "started_at": "2026-08-12T12:51:30.879314+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-19/parallel/run.json",
+      "started_at": "2026-09-13T18:37:12.399330+00:00",
       "case": "default",
       "image": "algo1-4-j-19:v1",
       "options": {
@@ -255,8 +255,8 @@
       "unsupported": []
     },
     "algo1-4-j-20": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-20/default/run.json",
-      "started_at": "2026-08-12T12:56:00.162733+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-20/parallel/run.json",
+      "started_at": "2026-09-13T18:37:42.411925+00:00",
       "case": "default",
       "image": "algo1-4-j-20:v1",
       "options": {
@@ -270,12 +270,12 @@
       "unsupported": []
     },
     "algo1-4-j-21": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-21/default/run.json",
-      "started_at": "2026-08-12T13:01:09.672083+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-21/parallel/run.json",
+      "started_at": "2026-09-13T18:38:01.449296+00:00",
       "case": "default",
       "image": "algo1-4-j-21:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -285,12 +285,12 @@
       "unsupported": []
     },
     "algo1-4-j-22": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-22/default/run.json",
-      "started_at": "2026-08-12T13:01:28.046005+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-22/parallel/run.json",
+      "started_at": "2026-09-13T18:38:19.469030+00:00",
       "case": "default",
       "image": "algo1-4-j-22:v1",
       "options": {
-        "gpus": "device=0",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -300,8 +300,8 @@
       "unsupported": []
     },
     "algo1-4-j-23": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-23/default/run.json",
-      "started_at": "2026-08-12T13:04:34.994998+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-23/parallel/run.json",
+      "started_at": "2026-09-13T18:38:36.156927+00:00",
       "case": "default",
       "image": "algo1-4-j-23:v1",
       "options": {
@@ -314,12 +314,12 @@
       "unsupported": []
     },
     "algo1-4-j-24": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-24/current-params/run.json",
-      "started_at": "2026-09-10T08:42:35.793905+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-24/parallel/run.json",
+      "started_at": "2026-09-13T18:39:15.197792+00:00",
+      "case": "default",
       "image": "algo1-4-j-24:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -329,12 +329,12 @@
       "unsupported": []
     },
     "algo1-4-j-25": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-25/default/run.json",
-      "started_at": "2026-08-12T13:39:59.126098+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-25/parallel/run.json",
+      "started_at": "2026-09-13T18:39:51.957234+00:00",
       "case": "default",
       "image": "algo1-4-j-25:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -344,8 +344,8 @@
       "unsupported": []
     },
     "algo1-4-j-26": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-26/default/run.json",
-      "started_at": "2026-08-12T13:39:11.949535+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-26/parallel/run.json",
+      "started_at": "2026-09-13T18:40:30.014138+00:00",
       "case": "default",
       "image": "algo1-4-j-26:v1",
       "options": {
@@ -359,12 +359,12 @@
       "unsupported": []
     },
     "algo1-4-j-27": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-27/default/run.json",
-      "started_at": "2026-08-12T13:39:12.172186+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-27/parallel/run.json",
+      "started_at": "2026-09-13T18:42:53.816308+00:00",
       "case": "default",
       "image": "algo1-4-j-27:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -374,12 +374,12 @@
       "unsupported": []
     },
     "algo1-4-j-28": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-28/default/run.json",
-      "started_at": "2026-08-12T13:54:32.303217+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-28/parallel/run.json",
+      "started_at": "2026-09-13T18:43:35.460008+00:00",
       "case": "default",
       "image": "algo1-4-j-28:v1",
       "options": {
-        "gpus": "device=1"
+        "gpus": "device=0"
       },
       "environment": {},
       "command": [],
@@ -388,8 +388,8 @@
       "unsupported": []
     },
     "algo1-4-j-29": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-29/default/run.json",
-      "started_at": "2026-08-12T13:54:34.622328+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-29/parallel/run.json",
+      "started_at": "2026-09-13T18:44:22.298284+00:00",
       "case": "default",
       "image": "algo1-4-j-29:v1",
       "options": {},
@@ -400,8 +400,8 @@
       "unsupported": []
     },
     "algo1-4-j-30": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-30/default/run.json",
-      "started_at": "2026-08-12T13:56:43.257342+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-30/parallel/run.json",
+      "started_at": "2026-09-13T18:44:35.997049+00:00",
       "case": "default",
       "image": "algo1-4-j-30:v1",
       "options": {},
@@ -412,12 +412,12 @@
       "unsupported": []
     },
     "algo1-4-j-31": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-31/current-params/run.json",
-      "started_at": "2026-09-10T08:43:53.419585+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-31/parallel/run.json",
+      "started_at": "2026-09-13T18:44:46.881775+00:00",
+      "case": "default",
       "image": "algo1-4-j-31:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -427,12 +427,12 @@
       "unsupported": []
     },
     "algo1-4-j-32": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-32/current-params/run.json",
-      "started_at": "2026-09-10T08:46:07.720499+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-32/parallel/run.json",
+      "started_at": "2026-09-13T18:46:01.165257+00:00",
+      "case": "default",
       "image": "algo1-4-j-32:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -442,12 +442,12 @@
       "unsupported": []
     },
     "algo1-4-j-33": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-33/default/run.json",
-      "started_at": "2026-08-12T14:14:39.011296+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-33/parallel/run.json",
+      "started_at": "2026-09-13T18:47:13.389183+00:00",
       "case": "default",
       "image": "algo1-4-j-33:v1",
       "options": {
-        "gpus": "device=1"
+        "gpus": "device=0"
       },
       "environment": {},
       "command": [],
@@ -456,12 +456,12 @@
       "unsupported": []
     },
     "algo1-4-j-34": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-34/current-params/run.json",
-      "started_at": "2026-09-10T08:48:12.223662+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-34/parallel/run.json",
+      "started_at": "2026-09-13T18:47:47.186946+00:00",
+      "case": "default",
       "image": "algo1-4-j-34:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -471,12 +471,12 @@
       "unsupported": []
     },
     "algo1-4-j-35": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-35/current-params/run.json",
-      "started_at": "2026-09-10T08:50:08.359013+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-35/parallel/run.json",
+      "started_at": "2026-09-13T18:49:04.829926+00:00",
+      "case": "default",
       "image": "algo1-4-j-35:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -486,8 +486,8 @@
       "unsupported": []
     },
     "algo1-4-j-36": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-36/default/run.json",
-      "started_at": "2026-08-12T13:24:36.157627+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-36/parallel/run.json",
+      "started_at": "2026-09-13T18:50:21.171190+00:00",
       "case": "default",
       "image": "algo1-4-j-36:v1",
       "options": {
@@ -501,12 +501,12 @@
       "unsupported": []
     },
     "algo1-4-j-37": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-37/default/run.json",
-      "started_at": "2026-08-12T13:24:36.164595+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-37/parallel/run.json",
+      "started_at": "2026-09-13T18:52:43.921184+00:00",
       "case": "default",
       "image": "algo1-4-j-37:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -516,12 +516,12 @@
       "unsupported": []
     },
     "algo1-4-j-38": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-38/default/run.json",
-      "started_at": "2026-08-12T13:29:45.487775+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-38/parallel/run.json",
+      "started_at": "2026-09-13T18:53:34.515192+00:00",
       "case": "default",
       "image": "algo1-4-j-38:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -531,8 +531,8 @@
       "unsupported": []
     },
     "algo1-4-j-39": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-39/default/run.json",
-      "started_at": "2026-08-12T13:30:08.758940+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-39/parallel/run.json",
+      "started_at": "2026-09-13T18:57:24.043266+00:00",
       "case": "default",
       "image": "algo1-4-j-39:v1",
       "options": {
@@ -576,12 +576,12 @@
       "unsupported": []
     },
     "algo1-4-j-42": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-42/current-params/run.json",
-      "started_at": "2026-09-10T09:02:52.003806+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-42/parallel/run.json",
+      "started_at": "2026-09-13T19:01:22.012135+00:00",
+      "case": "default",
       "image": "algo1-4-j-42:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -591,12 +591,12 @@
       "unsupported": []
     },
     "algo1-4-j-43": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-43/default/run.json",
-      "started_at": "2026-08-12T15:05:38.281923+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-43/parallel/run.json",
+      "started_at": "2026-09-13T19:03:01.907474+00:00",
       "case": "default",
       "image": "algo1-4-j-43:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -606,8 +606,8 @@
       "unsupported": []
     },
     "algo1-4-j-44": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-44/default/run.json",
-      "started_at": "2026-08-12T15:05:38.366390+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-44/parallel/run.json",
+      "started_at": "2026-09-13T19:03:44.227586+00:00",
       "case": "default",
       "image": "algo1-4-j-44:v1",
       "options": {
@@ -621,8 +621,8 @@
       "unsupported": []
     },
     "algo1-4-j-45": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-45/default/run.json",
-      "started_at": "2026-08-12T13:09:34.569449+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-45/parallel/run.json",
+      "started_at": "2026-09-13T19:04:21.180372+00:00",
       "case": "default",
       "image": "algo1-4-j-45:v1",
       "options": {
@@ -636,8 +636,8 @@
       "unsupported": []
     },
     "algo1-4-j-46": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-46/default/run.json",
-      "started_at": "2026-08-12T13:09:34.580849+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-46/parallel/run.json",
+      "started_at": "2026-09-13T19:06:00.389920+00:00",
       "case": "default",
       "image": "algo1-4-j-46:v1",
       "options": {
@@ -651,8 +651,8 @@
       "unsupported": []
     },
     "algo1-4-j-47": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-47/default/run.json",
-      "started_at": "2026-08-12T13:11:30.543453+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-47/parallel/run.json",
+      "started_at": "2026-09-13T19:06:39.216416+00:00",
       "case": "default",
       "image": "algo1-4-j-47:v1",
       "options": {
@@ -666,8 +666,8 @@
       "unsupported": []
     },
     "algo1-4-j-48": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-48/default/run.json",
-      "started_at": "2026-08-12T13:11:30.702061+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-48/parallel/run.json",
+      "started_at": "2026-09-13T19:07:14.477245+00:00",
       "case": "default",
       "image": "algo1-4-j-48:v1",
       "options": {
@@ -681,12 +681,12 @@
       "unsupported": []
     },
     "algo1-4-j-49": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-49/current-params/run.json",
-      "started_at": "2026-09-10T09:03:17.229102+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-49/parallel/run.json",
+      "started_at": "2026-09-13T19:07:38.149691+00:00",
+      "case": "default",
       "image": "algo1-4-j-49:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -696,8 +696,8 @@
       "unsupported": []
     },
     "algo1-4-j-50": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-50/default/run.json",
-      "started_at": "2026-08-12T15:12:04.304595+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-50/parallel/run.json",
+      "started_at": "2026-09-13T19:08:23.775830+00:00",
       "case": "default",
       "image": "algo1-4-j-50:v1",
       "options": {
@@ -711,25 +711,10 @@
       "unsupported": []
     },
     "algo1-4-j-51": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-51/default/run.json",
-      "started_at": "2026-08-12T15:16:12.458191+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-51/parallel/run.json",
+      "started_at": "2026-09-13T19:09:01.504484+00:00",
       "case": "default",
       "image": "algo1-4-j-51:v1",
-      "options": {
-        "gpus": "device=1",
-        "shm-size": "16g"
-      },
-      "environment": {},
-      "command": [],
-      "exit_code": 0,
-      "output_files": 2,
-      "unsupported": []
-    },
-    "algo1-4-j-52": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-52/default/run.json",
-      "started_at": "2026-08-12T15:16:47.891908+00:00",
-      "case": "default",
-      "image": "algo1-4-j-52:v1",
       "options": {
         "gpus": "device=0",
         "shm-size": "16g"
@@ -740,9 +725,24 @@
       "output_files": 2,
       "unsupported": []
     },
+    "algo1-4-j-52": {
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-52/parallel/run.json",
+      "started_at": "2026-09-13T19:09:39.842681+00:00",
+      "case": "default",
+      "image": "algo1-4-j-52:v1",
+      "options": {
+        "gpus": "device=1",
+        "shm-size": "16g"
+      },
+      "environment": {},
+      "command": [],
+      "exit_code": 0,
+      "output_files": 2,
+      "unsupported": []
+    },
     "algo1-4-j-53": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-53/default/run.json",
-      "started_at": "2026-08-12T15:20:33.012212+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-53/parallel/run.json",
+      "started_at": "2026-09-13T19:10:16.103037+00:00",
       "case": "default",
       "image": "algo1-4-j-53:v1",
       "options": {},
@@ -753,8 +753,8 @@
       "unsupported": []
     },
     "algo1-4-j-54": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-54/default/run.json",
-      "started_at": "2026-08-12T15:22:30.314105+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-54/parallel/run.json",
+      "started_at": "2026-09-13T19:10:55.291631+00:00",
       "case": "default",
       "image": "algo1-4-j-54:v1",
       "options": {},
@@ -765,8 +765,8 @@
       "unsupported": []
     },
     "algo1-4-j-55": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-55/default/run.json",
-      "started_at": "2026-08-12T15:26:48.114733+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-55/parallel/run.json",
+      "started_at": "2026-09-13T19:11:15.102284+00:00",
       "case": "default",
       "image": "algo1-4-j-55:v1",
       "options": {},
@@ -777,9 +777,9 @@
       "unsupported": []
     },
     "algo1-4-j-56": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-56/current-params/run.json",
-      "started_at": "2026-09-10T09:03:35.174848+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-56/parallel/run.json",
+      "started_at": "2026-09-13T19:11:55.070504+00:00",
+      "case": "default",
       "image": "algo1-4-j-56:v1",
       "options": {
         "shm-size": "16g"
@@ -791,8 +791,8 @@
       "unsupported": []
     },
     "algo1-4-j-57": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-57/default/run.json",
-      "started_at": "2026-08-12T15:36:02.919187+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-57/parallel/run.json",
+      "started_at": "2026-09-13T19:12:55.829138+00:00",
       "case": "default",
       "image": "algo1-4-j-57:v1",
       "options": {
@@ -805,8 +805,8 @@
       "unsupported": []
     },
     "algo1-4-j-58": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-58/default/run.json",
-      "started_at": "2026-08-12T15:38:44.310185+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-58/parallel/run.json",
+      "started_at": "2026-09-13T19:13:38.582906+00:00",
       "case": "default",
       "image": "algo1-4-j-58:v1",
       "options": {
@@ -819,8 +819,8 @@
       "unsupported": []
     },
     "algo1-4-j-59": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-59/default/run.json",
-      "started_at": "2026-08-12T15:42:19.462448+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-59/parallel/run.json",
+      "started_at": "2026-09-13T19:14:21.382055+00:00",
       "case": "default",
       "image": "algo1-4-j-59:v1",
       "options": {
@@ -833,12 +833,12 @@
       "unsupported": []
     },
     "algo1-4-j-60": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-60/default/run.json",
-      "started_at": "2026-08-12T15:45:44.699294+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-60/parallel/run.json",
+      "started_at": "2026-09-13T19:15:07.518068+00:00",
       "case": "default",
       "image": "algo1-4-j-60:v1",
       "options": {
-        "gpus": "device=0",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -848,12 +848,12 @@
       "unsupported": []
     },
     "algo1-4-j-61": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-61/default/run.json",
-      "started_at": "2026-08-12T15:49:54.019042+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-61/parallel/run.json",
+      "started_at": "2026-09-13T19:16:30.100795+00:00",
       "case": "default",
       "image": "algo1-4-j-61:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "8g"
       },
       "environment": {},
@@ -863,8 +863,8 @@
       "unsupported": []
     },
     "algo1-4-j-62": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-62/default/run.json",
-      "started_at": "2026-08-12T13:11:59.571426+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-62/parallel/run.json",
+      "started_at": "2026-09-13T19:16:44.026082+00:00",
       "case": "default",
       "image": "algo1-4-j-62:v1",
       "options": {
@@ -878,12 +878,12 @@
       "unsupported": []
     },
     "algo1-4-j-63": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-63/default/run.json",
-      "started_at": "2026-08-12T15:52:18.040560+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-63/parallel/run.json",
+      "started_at": "2026-09-13T19:17:20.815662+00:00",
       "case": "default",
       "image": "algo1-4-j-63:v1",
       "options": {
-        "gpus": "device=1"
+        "gpus": "device=0"
       },
       "environment": {},
       "command": [],
@@ -892,8 +892,8 @@
       "unsupported": []
     },
     "algo1-4-j-64": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-64/default/run.json",
-      "started_at": "2026-08-12T15:55:50.979393+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-64/parallel/run.json",
+      "started_at": "2026-09-13T19:19:03.173888+00:00",
       "case": "default",
       "image": "algo1-4-j-64:v1",
       "options": {
@@ -907,8 +907,8 @@
       "unsupported": []
     },
     "algo1-4-j-65": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-65/default/run.json",
-      "started_at": "2026-08-12T16:04:10.805764+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-65/parallel/run.json",
+      "started_at": "2026-09-13T19:20:00.149796+00:00",
       "case": "default",
       "image": "algo1-4-j-65:v1",
       "options": {},
@@ -919,8 +919,8 @@
       "unsupported": []
     },
     "algo1-4-j-66": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-66/default/run.json",
-      "started_at": "2026-08-12T16:05:13.990359+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-66/parallel/run.json",
+      "started_at": "2026-09-13T19:20:06.124448+00:00",
       "case": "default",
       "image": "algo1-4-j-66:v1",
       "options": {
@@ -934,12 +934,12 @@
       "unsupported": []
     },
     "algo1-4-j-67": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-67/default/run.json",
-      "started_at": "2026-08-12T16:05:12.348990+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-67/parallel/run.json",
+      "started_at": "2026-09-13T19:21:31.257424+00:00",
       "case": "default",
       "image": "algo1-4-j-67:v1",
       "options": {
-        "gpus": "device=0",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -949,8 +949,8 @@
       "unsupported": []
     },
     "algo1-4-j-68": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-68/default/run.json",
-      "started_at": "2026-08-12T16:17:34.876189+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-68/parallel/run.json",
+      "started_at": "2026-09-13T19:22:08.625956+00:00",
       "case": "default",
       "image": "algo1-4-j-68:v1",
       "options": {},
@@ -961,8 +961,8 @@
       "unsupported": []
     },
     "algo1-4-j-69": {
-      "record": "docs_algo1-4-j-16_70_latest/evidence/runs/algo1-4-j-69/default/run.json",
-      "started_at": "2026-08-12T13:12:07.373403+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-69/parallel/run.json",
+      "started_at": "2026-09-13T19:22:18.314078+00:00",
       "case": "default",
       "image": "algo1-4-j-69:v1",
       "options": {},
@@ -973,12 +973,12 @@
       "unsupported": []
     },
     "algo1-4-j-70": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-70/current-params/run.json",
-      "started_at": "2026-09-10T09:03:48.109145+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-70/parallel/run.json",
+      "started_at": "2026-09-13T19:22:37.594448+00:00",
+      "case": "default",
       "image": "algo1-4-j-70:v1",
       "options": {
-        "gpus": "all"
+        "gpus": "device=0"
       },
       "environment": {},
       "command": [],
@@ -987,8 +987,8 @@
       "unsupported": []
     },
     "algo1-4-j-71": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-71/default/run.json",
-      "started_at": "2026-08-12T16:34:17.499586+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-71/parallel/run.json",
+      "started_at": "2026-09-13T19:23:29.967296+00:00",
       "case": "default",
       "image": "algo1-4-j-71:v1",
       "options": {
@@ -1002,12 +1002,12 @@
       "unsupported": []
     },
     "algo1-4-j-72": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-72/current-params/run.json",
-      "started_at": "2026-09-10T09:04:02.759653+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-72/parallel/run.json",
+      "started_at": "2026-09-13T19:24:59.807035+00:00",
+      "case": "default",
       "image": "algo1-4-j-72:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "8g"
       },
       "environment": {},
@@ -1017,12 +1017,12 @@
       "unsupported": []
     },
     "algo1-4-j-73": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-73/current-params/run.json",
-      "started_at": "2026-09-10T09:04:07.555171+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-73/parallel/run.json",
+      "started_at": "2026-09-13T19:25:08.503041+00:00",
+      "case": "default",
       "image": "algo1-4-j-73:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1047,12 +1047,12 @@
       "unsupported": []
     },
     "algo1-4-j-75": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-75/current-params/run.json",
-      "started_at": "2026-09-10T09:06:24.243050+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-75/parallel/run.json",
+      "started_at": "2026-09-13T19:29:44.749665+00:00",
+      "case": "default",
       "image": "algo1-4-j-75:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1062,9 +1062,9 @@
       "unsupported": []
     },
     "algo1-4-j-76": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-76/current-params/run.json",
-      "started_at": "2026-09-10T09:07:08.436830+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-76/parallel/run.json",
+      "started_at": "2026-09-13T19:30:17.900520+00:00",
+      "case": "default",
       "image": "algo1-4-j-76:v1",
       "options": {},
       "environment": {},
@@ -1074,8 +1074,8 @@
       "unsupported": []
     },
     "algo1-4-j-77": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-77/default/run.json",
-      "started_at": "2026-08-12T16:48:57.788728+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-77/parallel/run.json",
+      "started_at": "2026-09-13T19:30:20.223358+00:00",
       "case": "default",
       "image": "algo1-4-j-77:v1",
       "options": {
@@ -1089,12 +1089,12 @@
       "unsupported": []
     },
     "algo1-4-j-78": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-78/current-params/run.json",
-      "started_at": "2026-09-10T09:07:09.269416+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-78/parallel/run.json",
+      "started_at": "2026-09-13T19:30:46.459555+00:00",
+      "case": "default",
       "image": "algo1-4-j-78:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "8g"
       },
       "environment": {},
@@ -1104,12 +1104,12 @@
       "unsupported": []
     },
     "algo1-4-j-79": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-79/default/run.json",
-      "started_at": "2026-08-12T17:07:02.487454+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-79/parallel/run.json",
+      "started_at": "2026-09-13T19:31:40.474379+00:00",
       "case": "default",
       "image": "algo1-4-j-79:v1",
       "options": {
-        "gpus": "device=0",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1119,8 +1119,8 @@
       "unsupported": []
     },
     "algo1-4-j-80": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-80/default/run.json",
-      "started_at": "2026-08-12T17:02:23.639330+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-80/parallel/run.json",
+      "started_at": "2026-09-13T19:32:08.647035+00:00",
       "case": "default",
       "image": "algo1-4-j-80:v1",
       "options": {},
@@ -1131,12 +1131,12 @@
       "unsupported": []
     },
     "algo1-4-j-81": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-81/default/run.json",
-      "started_at": "2026-08-12T17:24:36.897283+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-81/parallel/run.json",
+      "started_at": "2026-09-13T19:32:26.826819+00:00",
       "case": "default",
       "image": "algo1-4-j-81:v1",
       "options": {
-        "gpus": "device=0",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1165,12 +1165,12 @@
       "unsupported": []
     },
     "algo1-4-j-82": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-82/default/run.json",
-      "started_at": "2026-08-12T17:24:36.897321+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-82/parallel/run.json",
+      "started_at": "2026-09-13T19:33:01.044970+00:00",
       "case": "default",
       "image": "algo1-4-j-82:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1201,8 +1201,8 @@
       "unsupported": []
     },
     "algo1-4-j-83": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-83/default/run.json",
-      "started_at": "2026-08-12T17:31:40.575895+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-83/parallel/run.json",
+      "started_at": "2026-09-13T19:33:27.956367+00:00",
       "case": "default",
       "image": "algo1-4-j-83:v1",
       "options": {
@@ -1244,8 +1244,8 @@
       "unsupported": []
     },
     "algo1-4-j-84": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-84/default/run.json",
-      "started_at": "2026-08-12T17:33:03.736737+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-84/parallel/run.json",
+      "started_at": "2026-09-13T19:33:51.345808+00:00",
       "case": "default",
       "image": "algo1-4-j-84:v1",
       "options": {},
@@ -1256,12 +1256,12 @@
       "unsupported": []
     },
     "algo1-4-j-85": {
-      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-85/default/run.json",
-      "started_at": "2026-08-05T03:08:11.739198+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-85/parallel/run.json",
+      "started_at": "2026-09-13T19:33:52.353601+00:00",
       "case": "default",
       "image": "algo1-4-j-85:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1271,12 +1271,12 @@
       "unsupported": []
     },
     "algo1-4-j-86": {
-      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-86/default/run.json",
-      "started_at": "2026-08-05T03:10:55.282900+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-86/parallel/run.json",
+      "started_at": "2026-09-13T19:33:53.166518+00:00",
       "case": "default",
       "image": "algo1-4-j-86:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1286,12 +1286,12 @@
       "unsupported": []
     },
     "algo1-4-j-87": {
-      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-87/default/run.json",
-      "started_at": "2026-08-05T03:11:56.548865+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-87/parallel/run.json",
+      "started_at": "2026-09-13T19:33:54.116500+00:00",
       "case": "default",
       "image": "algo1-4-j-87:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1301,12 +1301,12 @@
       "unsupported": []
     },
     "algo1-4-j-88": {
-      "record": "docker_retest_history_20260910/runs/algo1-4-j-88/current-params/run.json",
-      "started_at": "2026-09-10T09:07:51.827217+00:00",
-      "case": "current-params",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-88/parallel/run.json",
+      "started_at": "2026-09-13T19:33:54.883633+00:00",
+      "case": "default",
       "image": "algo1-4-j-88:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1316,12 +1316,12 @@
       "unsupported": []
     },
     "algo1-4-j-89": {
-      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-89/default/run.json",
-      "started_at": "2026-08-05T04:28:07.211751+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-89/parallel/run.json",
+      "started_at": "2026-09-13T19:34:09.175565+00:00",
       "case": "default",
       "image": "algo1-4-j-89:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {
@@ -1338,12 +1338,12 @@
       "unsupported": []
     },
     "algo1-4-j-90": {
-      "record": "docker_90_defaults_88_accuracy_20260910/runs/algo1-4-j-90/tar-roundtrip-no-env/run.json",
-      "started_at": "2026-09-10T09:30:04.949302+00:00",
-      "case": "tar-roundtrip-no-env",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-90/parallel/run.json",
+      "started_at": "2026-09-13T19:34:26.552389+00:00",
+      "case": "default",
       "image": "algo1-4-j-90:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1353,12 +1353,12 @@
       "unsupported": []
     },
     "algo1-4-j-93": {
-      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-93/default/run.json",
-      "started_at": "2026-08-05T04:54:13.914465+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-93/parallel/run.json",
+      "started_at": "2026-09-13T19:34:41.387111+00:00",
       "case": "default",
       "image": "algo1-4-j-93:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1368,12 +1368,12 @@
       "unsupported": []
     },
     "algo1-4-j-94": {
-      "record": "test_docs_algo1-4-j-85_95/evidence/runs/algo1-4-j-94/after-load/run.json",
-      "started_at": "2026-08-05T05:03:24.837836+00:00",
-      "case": "after-load",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-94/parallel/run.json",
+      "started_at": "2026-09-13T19:37:01.991088+00:00",
+      "case": "default",
       "image": "algo1-4-j-94:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1413,12 +1413,12 @@
       "unsupported": []
     },
     "algo1-4-j-97": {
-      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-97/run_summary_compact.json",
-      "started_at": "2026-08-04T17:04:12.509329+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-97/parallel/run.json",
+      "started_at": "2026-09-13T19:45:14.565526+00:00",
       "case": "default",
       "image": "algo1-4-j-97:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1428,12 +1428,12 @@
       "unsupported": []
     },
     "algo1-4-j-98": {
-      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-98/run_summary_compact.json",
-      "started_at": "2026-08-04T17:08:28.025930+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-98/parallel/run.json",
+      "started_at": "2026-09-13T19:48:38.414351+00:00",
       "case": "default",
       "image": "algo1-4-j-98:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1443,12 +1443,12 @@
       "unsupported": []
     },
     "algo1-4-j-99": {
-      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-99/run_summary_compact.json",
-      "started_at": "2026-08-04T17:11:51.498694+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-99/parallel/run.json",
+      "started_at": "2026-09-13T19:51:28.398057+00:00",
       "case": "default",
       "image": "algo1-4-j-99:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1458,12 +1458,12 @@
       "unsupported": []
     },
     "algo1-4-j-100": {
-      "record": "test_docs_algo1-4-j-95_100/evidence/algo1-4-j-100/run_summary_compact.json",
-      "started_at": "2026-08-04T17:16:30.559411+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-100/parallel/run.json",
+      "started_at": "2026-09-13T19:54:01.984227+00:00",
       "case": "default",
       "image": "algo1-4-j-100:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1473,8 +1473,8 @@
       "unsupported": []
     },
     "algo1-4-j-105": {
-      "record": "docs_formula_punctuation_new_algorithms_1_131/evidence/algo1-4-j-105/run_summary.json",
-      "started_at": "2026-08-18T07:35:52.717590+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-105/parallel/run.json",
+      "started_at": "2026-09-13T19:56:27.622009+00:00",
       "case": "default",
       "image": "algo1-4-j-105:v1",
       "options": {
@@ -1488,12 +1488,12 @@
       "unsupported": []
     },
     "algo1-4-j-106": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-106/default/run.json",
-      "started_at": "2026-08-21T04:53:19.606982+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-106/parallel/run.json",
+      "started_at": "2026-09-13T19:58:44.237437+00:00",
       "case": "default",
       "image": "algo1-4-j-106:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1503,12 +1503,12 @@
       "unsupported": []
     },
     "algo1-4-j-107": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-107/default/run.json",
-      "started_at": "2026-08-21T04:53:22.355007+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-107/parallel/run.json",
+      "started_at": "2026-09-13T19:59:05.430943+00:00",
       "case": "default",
       "image": "algo1-4-j-107:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1518,12 +1518,12 @@
       "unsupported": []
     },
     "algo1-4-j-108": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-108/default/run.json",
-      "started_at": "2026-08-21T04:53:24.338061+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-108/parallel/run.json",
+      "started_at": "2026-09-13T19:59:11.339508+00:00",
       "case": "default",
       "image": "algo1-4-j-108:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1533,12 +1533,12 @@
       "unsupported": []
     },
     "algo1-4-j-109": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-109/default/run.json",
-      "started_at": "2026-08-21T04:52:49.144265+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-109/parallel/run.json",
+      "started_at": "2026-09-13T19:59:16.651422+00:00",
       "case": "default",
       "image": "algo1-4-j-109:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1548,12 +1548,12 @@
       "unsupported": []
     },
     "algo1-4-j-110": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-110/default/run.json",
-      "started_at": "2026-08-21T04:53:26.369462+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-110/parallel/run.json",
+      "started_at": "2026-09-13T19:59:28.472378+00:00",
       "case": "default",
       "image": "algo1-4-j-110:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1563,12 +1563,12 @@
       "unsupported": []
     },
     "algo1-4-j-111": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-111/default/run.json",
-      "started_at": "2026-08-21T04:53:28.258901+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-111/parallel/run.json",
+      "started_at": "2026-09-13T19:59:39.500647+00:00",
       "case": "default",
       "image": "algo1-4-j-111:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1578,12 +1578,12 @@
       "unsupported": []
     },
     "algo1-4-j-112": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-112/default/run.json",
-      "started_at": "2026-08-21T04:53:30.285440+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-112/parallel/run.json",
+      "started_at": "2026-09-13T19:59:44.442539+00:00",
       "case": "default",
       "image": "algo1-4-j-112:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1593,12 +1593,12 @@
       "unsupported": []
     },
     "algo1-4-j-113": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-113/default/run.json",
-      "started_at": "2026-08-21T04:53:32.113018+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-113/parallel/run.json",
+      "started_at": "2026-09-13T19:59:49.012887+00:00",
       "case": "default",
       "image": "algo1-4-j-113:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1608,12 +1608,12 @@
       "unsupported": []
     },
     "algo1-4-j-114": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-114/default/run.json",
-      "started_at": "2026-08-21T04:53:57.904455+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-114/parallel/run.json",
+      "started_at": "2026-09-13T20:00:33.335021+00:00",
       "case": "default",
       "image": "algo1-4-j-114:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1623,12 +1623,12 @@
       "unsupported": []
     },
     "algo1-4-j-115": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-115/default/run.json",
-      "started_at": "2026-08-21T04:54:01.862031+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-115/parallel/run.json",
+      "started_at": "2026-09-13T20:01:01.236580+00:00",
       "case": "default",
       "image": "algo1-4-j-115:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1638,12 +1638,12 @@
       "unsupported": []
     },
     "algo1-4-j-116": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-116/default/run.json",
-      "started_at": "2026-08-21T04:54:04.864549+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-116/parallel/run.json",
+      "started_at": "2026-09-13T20:01:07.081583+00:00",
       "case": "default",
       "image": "algo1-4-j-116:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1653,12 +1653,12 @@
       "unsupported": []
     },
     "algo1-4-j-117": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-117/default/run.json",
-      "started_at": "2026-08-21T04:54:08.329404+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-117/parallel/run.json",
+      "started_at": "2026-09-13T20:01:13.269636+00:00",
       "case": "default",
       "image": "algo1-4-j-117:v1",
       "options": {
-        "gpus": "all",
+        "gpus": "device=1",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1668,8 +1668,8 @@
       "unsupported": []
     },
     "algo1-4-j-118": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-118/default/run.json",
-      "started_at": "2026-08-21T04:54:10.827763+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-118/parallel/run.json",
+      "started_at": "2026-09-13T20:01:18.896465+00:00",
       "case": "default",
       "image": "algo1-4-j-118:v1",
       "options": {},
@@ -1680,8 +1680,8 @@
       "unsupported": []
     },
     "algo1-4-j-119": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-119/default/run.json",
-      "started_at": "2026-08-21T04:54:14.540876+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-119/parallel/run.json",
+      "started_at": "2026-09-13T20:01:24.561182+00:00",
       "case": "default",
       "image": "algo1-4-j-119:v1",
       "options": {},
@@ -1692,8 +1692,8 @@
       "unsupported": []
     },
     "algo1-4-j-120": {
-      "record": "docs_union_0821_revision_20260821/evidence/docker_runs/algo1-4-j-120/default/run.json",
-      "started_at": "2026-08-21T04:54:16.837550+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-120/parallel/run.json",
+      "started_at": "2026-09-13T20:01:28.714759+00:00",
       "case": "default",
       "image": "algo1-4-j-120:v1",
       "options": {},
@@ -1704,8 +1704,8 @@
       "unsupported": []
     },
     "algo1-4-j-121": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-121/default/run.json",
-      "started_at": "2026-08-12T17:35:15.981388+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-121/parallel/run.json",
+      "started_at": "2026-09-13T20:01:32.047788+00:00",
       "case": "default",
       "image": "algo1-4-j-121:v1",
       "options": {
@@ -1719,8 +1719,8 @@
       "unsupported": []
     },
     "algo1-4-j-122": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-122/default/run.json",
-      "started_at": "2026-08-12T17:37:04.228437+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-122/parallel/run.json",
+      "started_at": "2026-09-13T20:02:08.621973+00:00",
       "case": "default",
       "image": "algo1-4-j-122:v1",
       "options": {
@@ -1734,8 +1734,8 @@
       "unsupported": []
     },
     "algo1-4-j-123": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-123/default/run.json",
-      "started_at": "2026-08-12T17:35:15.986114+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-123/parallel/run.json",
+      "started_at": "2026-09-13T20:04:47.187805+00:00",
       "case": "default",
       "image": "algo1-4-j-123:v1",
       "options": {
@@ -1749,8 +1749,8 @@
       "unsupported": []
     },
     "algo1-4-j-124": {
-      "record": "docs_algo1-4-j-71_126_latest/evidence/runs/algo1-4-j-124/default/run.json",
-      "started_at": "2026-08-12T17:07:07.932021+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-124/parallel/run.json",
+      "started_at": "2026-09-13T20:05:07.288615+00:00",
       "case": "default",
       "image": "algo1-4-j-124:v1",
       "options": {
@@ -1764,12 +1764,12 @@
       "unsupported": []
     },
     "algo1-4-j-128": {
-      "record": "docs_formula_punctuation_new_algorithms_1_131/evidence/algo1-4-j-128/run_summary.json",
-      "started_at": "2026-08-18T07:39:29.880710+00:00",
+      "record": "docker_reload_all_20260914/runs/algo1-4-j-128/parallel/run.json",
+      "started_at": "2026-09-13T20:05:37.294939+00:00",
       "case": "default",
       "image": "algo1-4-j-128:v1",
       "options": {
-        "gpus": "device=1",
+        "gpus": "device=0",
         "shm-size": "16g"
       },
       "environment": {},
@@ -1778,5 +1778,11 @@
       "output_files": 1,
       "unsupported": []
     }
+  },
+  "latest_batch_review": {
+    "directory": "docker_reload_all_20260914",
+    "successful_profiles": 114,
+    "scanned": 125,
+    "runtime_difference": "GPU assignments only; webpage selection remains authoritative. Failed records are not imported."
   }
 }
